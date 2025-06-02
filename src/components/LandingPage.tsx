@@ -1,40 +1,17 @@
-
-import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
+import HowItWorks from './HowItWorks';
+import CountdownTimer from './CountdownTimer';
 
 interface LandingPageProps {
   onStartEntry: () => void;
 }
 
 const LandingPage = ({ onStartEntry }: LandingPageProps) => {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 25,
-    hours: 14,
-    minutes: 32,
-    seconds: 45
-  });
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        } else if (prev.days > 0) {
-          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
-        }
-        return prev;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+  // Contest end date: July 31st, 2024
+  const contestEndDate = new Date(2024, 6, 31);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -57,22 +34,7 @@ const LandingPage = ({ onStartEntry }: LandingPageProps) => {
             
             {/* Countdown Timer */}
             <CardContent className="p-6 bg-gradient-to-br from-amber-50 to-stone-100">
-              <div className="text-center mb-4">
-                <p className="text-stone-700 font-semibold mb-3">Contest Ends In:</p>
-                <div className="grid grid-cols-4 gap-2">
-                  {[
-                    { label: 'Days', value: timeLeft.days },
-                    { label: 'Hrs', value: timeLeft.hours },
-                    { label: 'Min', value: timeLeft.minutes },
-                    { label: 'Sec', value: timeLeft.seconds }
-                  ].map(({ label, value }) => (
-                    <div key={label} className="bg-red-700 text-white rounded-lg p-3">
-                      <div className="text-2xl font-bold">{value.toString().padStart(2, '0')}</div>
-                      <div className="text-xs uppercase tracking-wide">{label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <CountdownTimer endDate={contestEndDate} className="mb-4" />
               
               <Button 
                 onClick={onStartEntry}
@@ -89,30 +51,7 @@ const LandingPage = ({ onStartEntry }: LandingPageProps) => {
           </Card>
 
           {/* How It Works */}
-          <Card className="card-western">
-            <CardHeader>
-              <CardTitle className="text-center text-2xl text-stone-800">
-                How It Works
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {[
-                { step: 1, title: "Pick Your Team", description: "Select one contestant from each PRCA event" },
-                { step: 2, title: "Submit Entry", description: "Pay $19.95 and lock in your picks" },
-                { step: 3, title: "Win Big", description: "Top teams split $60K + Ram 1500 truck" }
-              ].map(({ step, title, description }) => (
-                <div key={step} className="flex items-start space-x-4 p-3 bg-white/50 rounded-lg">
-                  <div className="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">
-                    {step}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-stone-800">{title}</h3>
-                    <p className="text-stone-600 text-sm">{description}</p>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+          <HowItWorks />
 
           {/* Prize Breakdown */}
           <Card className="card-western border-2 border-amber-400">

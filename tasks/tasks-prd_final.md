@@ -65,17 +65,17 @@
   - [x] 2.9 Handle edge cases (account already exists, server errors)
 
 - [ ] 3.0 Core Contest Experience
-  - [ ] 3.1 Develop Home page with contest promotion and countdown
-  - [ ] 3.2 Create "How it Works" component with step-by-step guide
-  - [ ] 3.3 Implement EventCard component for event selection
-  - [ ] 3.4 Build ContestantList component for contestant display
-  - [ ] 3.5 Create RosterBuilder page with event navigation
-  - [ ] 3.6 Implement ProgressBar to track selection progress
-  - [ ] 3.7 Set up TeamContext for managing user selections
-  - [ ] 3.8 Create contestant selection and deselection functionality
-  - [ ] 3.9 Develop backend endpoints for fetching contest/event data
-  - [ ] 3.10 Implement data persistence between navigation steps
-  - [ ] 3.11 Add validation to prevent incomplete submissions
+  - [x] 3.1 Develop Home page with contest promotion and countdown
+  - [x] 3.2 Create "How it Works" component with step-by-step guide
+  - [x] 3.3 Implement EventCard component for event selection
+  - [x] 3.4 Build ContestantList component for contestant display
+  - [x] 3.5 Create RosterBuilder page with event navigation
+  - [x] 3.6 Implement ProgressBar to track selection progress
+  - [x] 3.7 Set up TeamContext for managing user selections
+  - [x] 3.8 Create contestant selection and deselection functionality
+  - [x] 3.9 Develop backend endpoints for fetching contest/event data
+  - [x] 3.10 Implement data persistence between navigation steps
+  - [x] 3.11 Add validation to prevent incomplete submissions
 
 - [ ] 4.0 Team Submission and Confirmation
   - [ ] 4.1 Create PrizeSummary page with team review
