@@ -1,8 +1,6 @@
-
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/context/AuthContext';
+import { useTeam } from '@/context/TeamContext';
 import LandingPage from '@/components/LandingPage';
 import AccountCreation from '@/components/AccountCreation';
 import RosterBuilder from '@/components/RosterBuilder';
@@ -37,20 +35,32 @@ export type TeamSelection = {
 
 const Index = () => {
   const [currentStep, setCurrentStep] = useState<'landing' | 'account' | 'roster' | 'summary' | 'confirmation' | 'leaderboard'>('landing');
-  const [user, setUser] = useState<User | null>(null);
-  const [teamSelections, setTeamSelections] = useState<TeamSelection[]>([]);
+  const { user, login } = useAuth();
+  const { teamSelections, setUser, addSelection, clearSelections } = useTeam();
+
+  // Handle initial app state based on authentication
+  useEffect(() => {
+    if (user && currentStep === 'landing') {
+      // If user is already authenticated, sync the user with team context
+      setUser(user);
+    }
+  }, [user, currentStep, setUser]);
 
   const handleStartEntry = () => {
     setCurrentStep('account');
   };
 
   const handleAccountCreated = (userData: User) => {
+    login(userData);
     setUser(userData);
     setCurrentStep('roster');
   };
 
   const handleTeamComplete = (selections: TeamSelection[]) => {
-    setTeamSelections(selections);
+    // In a real implementation, we would use addSelection for each item
+    // For this MVP, we'll just clear and add all at once
+    clearSelections();
+    selections.forEach(selection => addSelection(selection));
     setCurrentStep('summary');
   };
 
