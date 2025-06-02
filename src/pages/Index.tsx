@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useTeam } from '@/context/TeamContext';
 import LandingPage from '@/components/LandingPage';
-import AccountCreation from '@/components/AccountCreation';
+import AuthenticationContainer from '@/components/AuthenticationContainer';
 import RosterBuilder from '@/components/RosterBuilder';
 import PrizeSummary from '@/components/PrizeSummary';
 import EntryConfirmation from '@/components/EntryConfirmation';
@@ -34,23 +34,29 @@ export type TeamSelection = {
 };
 
 const Index = () => {
-  const [currentStep, setCurrentStep] = useState<'landing' | 'account' | 'roster' | 'summary' | 'confirmation' | 'leaderboard'>('landing');
-  const { user, login } = useAuth();
+  const [currentStep, setCurrentStep] = useState<'landing' | 'auth' | 'roster' | 'summary' | 'confirmation' | 'leaderboard'>('landing');
+  const { user, login, isAuthenticated } = useAuth();
   const { teamSelections, setUser, addSelection, clearSelections } = useTeam();
 
   // Handle initial app state based on authentication
   useEffect(() => {
-    if (user && currentStep === 'landing') {
+    if (isAuthenticated && user && currentStep === 'landing') {
       // If user is already authenticated, sync the user with team context
       setUser(user);
     }
-  }, [user, currentStep, setUser]);
+  }, [isAuthenticated, user, currentStep, setUser]);
 
   const handleStartEntry = () => {
-    setCurrentStep('account');
+    if (isAuthenticated && user) {
+      // If user is already authenticated, go straight to roster builder
+      setCurrentStep('roster');
+    } else {
+      // Otherwise, go to authentication
+      setCurrentStep('auth');
+    }
   };
 
-  const handleAccountCreated = (userData: User) => {
+  const handleAuthSuccess = (userData: User) => {
     login(userData);
     setUser(userData);
     setCurrentStep('roster');
@@ -80,8 +86,8 @@ const Index = () => {
     switch (currentStep) {
       case 'landing':
         return <LandingPage onStartEntry={handleStartEntry} />;
-      case 'account':
-        return <AccountCreation onAccountCreated={handleAccountCreated} />;
+      case 'auth':
+        return <AuthenticationContainer onAuthSuccess={handleAuthSuccess} />;
       case 'roster':
         return <RosterBuilder onTeamComplete={handleTeamComplete} />;
       case 'summary':

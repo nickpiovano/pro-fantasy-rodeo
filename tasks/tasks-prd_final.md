@@ -53,16 +53,16 @@
   - [x] 1.8 Implement basic API error handling and validation
   - [x] 1.9 Set up development and production environments
 
-- [ ] 2.0 User Authentication and Account Management
-  - [ ] 2.1 Create account creation page with email and team name inputs
-  - [ ] 2.2 Implement form validation for account creation
-  - [ ] 2.3 Set up authentication service for user management
-  - [ ] 2.4 Create backend endpoints for user registration
-  - [ ] 2.5 Implement user data storage and retrieval
-  - [ ] 2.6 Add cookie/session management for returning users
-  - [ ] 2.7 Develop authentication state management with context
-  - [ ] 2.8 Create middleware for protected routes
-  - [ ] 2.9 Handle edge cases (account already exists, server errors)
+- [x] 2.0 User Authentication and Account Management
+  - [x] 2.1 Create account creation page with email and team name inputs
+  - [x] 2.2 Implement form validation for account creation
+  - [x] 2.3 Set up authentication service for user management
+  - [x] 2.4 Create backend endpoints for user registration
+  - [x] 2.5 Implement user data storage and retrieval
+  - [x] 2.6 Add cookie/session management for returning users
+  - [x] 2.7 Develop authentication state management with context
+  - [x] 2.8 Create middleware for protected routes
+  - [x] 2.9 Handle edge cases (account already exists, server errors)
 
 - [ ] 3.0 Core Contest Experience
   - [ ] 3.1 Develop Home page with contest promotion and countdown
