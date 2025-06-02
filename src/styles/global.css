@@ -282,6 +282,46 @@ button {
   background: var(--gradient-accent);
 }
 
+/* Text truncation and overflow classes */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.break-words {
+  word-wrap: break-word;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+.fluid-text {
+  font-size: clamp(1rem, 5vw, 1.5rem);
+}
+
 /* Responsive minimum touch target size for accessibility */
 .touch-target {
   min-height: 48px;
