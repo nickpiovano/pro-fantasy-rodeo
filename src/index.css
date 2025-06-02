@@ -3,44 +3,44 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 20 14% 4%;
-    --foreground: 43 13% 92%;
+    --background: 12 10% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 16 8% 8%;
-    --card-foreground: 43 13% 92%;
+    --card: 15 8% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 16 8% 8%;
-    --popover-foreground: 43 13% 92%;
+    --popover: 15 8% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 0 65% 45%;
-    --primary-foreground: 43 13% 92%;
+    --primary: 14 90% 60%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 30 25% 25%;
-    --secondary-foreground: 43 13% 92%;
+    --secondary: 20 15% 20%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 24 10% 15%;
-    --muted-foreground: 43 10% 65%;
+    --muted: 20 10% 18%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 30 40% 35%;
-    --accent-foreground: 43 13% 92%;
+    --accent: 20 25% 25%;
+    --accent-foreground: 0 0% 95%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 43 13% 92%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 24 8% 20%;
-    --input: 24 8% 20%;
-    --ring: 0 65% 45%;
+    --border: 20 8% 25%;
+    --input: 20 8% 25%;
+    --ring: 14 90% 60%;
 
     --radius: 0.75rem;
 
-    --rodeo-red: 0 65% 45%;
-    --rodeo-tan: 43 35% 75%;
-    --rodeo-brown: 30 25% 25%;
-    --rodeo-gold: 43 85% 65%;
+    --rodeo-orange: 14 90% 60%;
+    --rodeo-tan: 35 25% 75%;
+    --rodeo-charcoal: 20 15% 20%;
+    --rodeo-gold: 43 75% 65%;
   }
 }
 
@@ -50,60 +50,78 @@
   }
 
   body {
-    @apply bg-background text-foreground font-serif;
-    font-family: 'Crimson Text', serif;
-    background-image: 
-      radial-gradient(circle at 25% 25%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(178, 34, 34, 0.05) 0%, transparent 50%);
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, hsl(12, 10%, 8%) 0%, hsl(15, 8%, 12%) 100%);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bebas Neue', cursive;
-    letter-spacing: 0.025em;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
   }
 }
 
 @layer components {
-  .western-texture {
-    background-image: 
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 2px,
-        rgba(139, 69, 19, 0.03) 2px,
-        rgba(139, 69, 19, 0.03) 4px
-      );
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
   }
 
-  .btn-rodeo {
-    @apply bg-gradient-to-r from-red-700 to-red-600 hover:from-red-800 hover:to-red-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
-    font-family: 'Bebas Neue', cursive;
-    letter-spacing: 0.05em;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  .btn-primary {
+    @apply bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-4 px-8 rounded-xl shadow-lg transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-xl;
+    box-shadow: 0 10px 25px -5px rgba(251, 146, 60, 0.3);
   }
 
-  .card-western {
-    @apply bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-200 rounded-lg shadow-lg;
-    background-image: 
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 20px,
-        rgba(139, 69, 19, 0.02) 20px,
-        rgba(139, 69, 19, 0.02) 22px
-      );
+  .btn-secondary {
+    @apply bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-6 rounded-lg border border-white/20 backdrop-blur-sm transition-all duration-200 hover:scale-[1.02];
   }
 
-  .text-rodeo-gold {
-    color: hsl(var(--rodeo-gold));
+  .modern-input {
+    @apply bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 backdrop-blur-sm transition-all duration-200;
   }
 
-  .bg-rodeo-red {
-    background-color: hsl(var(--rodeo-red));
+  .progress-bar {
+    @apply bg-white/10 rounded-full overflow-hidden backdrop-blur-sm;
   }
 
-  .border-rodeo-tan {
-    border-color: hsl(var(--rodeo-tan));
+  .progress-fill {
+    @apply bg-gradient-to-r from-orange-500 to-amber-500 h-full transition-all duration-500 ease-out rounded-full;
+  }
+
+  .contestant-card {
+    @apply bg-white/5 hover:bg-white/10 border border-white/10 hover:border-orange-500/30 rounded-xl p-4 transition-all duration-200 hover:scale-[1.02] cursor-pointer backdrop-blur-sm;
+  }
+
+  .contestant-card.selected {
+    @apply bg-gradient-to-br from-orange-500/20 to-amber-500/20 border-orange-500/50 shadow-lg;
+    box-shadow: 0 8px 25px -5px rgba(251, 146, 60, 0.3);
+  }
+
+  .leaderboard-row {
+    @apply bg-white/5 border border-white/10 rounded-lg p-4 transition-all duration-200 backdrop-blur-sm;
+  }
+
+  .leaderboard-row.highlight {
+    @apply bg-gradient-to-r from-orange-500/20 to-amber-500/20 border-orange-500/40;
+  }
+
+  .western-accent {
+    position: relative;
+  }
+
+  .western-accent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(251, 146, 60, 0.5), transparent);
   }
 }
 
