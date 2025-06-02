@@ -1,73 +1,109 @@
-# Welcome to your Lovable project
+# Pro Fantasy Rodeo – 'Christmas in July' 🐎
 
-## Project info
+A modern, mobile-first fantasy rodeo application that allows users to participate in PRCA's 'Christmas in July' fantasy rodeo contest.
 
-**URL**: https://lovable.dev/projects/79a956a7-26e1-4ec4-8d37-2c261d97b624
+<!-- 
+![Pro Fantasy Rodeo](https://github.com/nickpiovano/pro-fantasy-rodeo/raw/main/public/screenshot.png)
+NOTE: Add a screenshot of the application here once it's running 
+-->
 
-## How can I edit this code?
+## Overview
 
-There are several ways of editing your application.
+Pro Fantasy Rodeo is a web application that enables rodeo fans to enter fantasy contests by selecting contestants across different rodeo events. The flagship 'Christmas in July' contest lets users pay $19.95 to build their dream team of rodeo competitors and compete for major prizes including a 2024 Ram 1500 truck and $60,000 in cash prizes.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/79a956a7-26e1-4ec4-8d37-2c261d97b624) and start prompting.
+- **User Authentication**: Easy account creation and login for returning users
+- **Roster Building**: Select one contestant per rodeo event with intuitive UI
+- **Mobile-First Design**: Optimized for mobile devices with a Western-themed interface
+- **Live Leaderboard**: Track your progress against other competitors
+- **Western-Themed UI**: Authentic rodeo styling and design elements
 
-Changes made via Lovable will be committed automatically to this repo.
+## Tech Stack
 
-**Use your preferred IDE**
+- **Frontend**: React, TypeScript, Vite
+- **Styling**: Tailwind CSS with custom Western theme
+- **State Management**: React Context API
+- **Data Fetching**: React Query
+- **Routing**: React Router
+- **Backend**: API integration (PRCA data)
+- **Authentication**: Custom auth with secure storage
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Prerequisites
 
-Follow these steps:
+- Node.js 18+ installed
+- npm or yarn package manager
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. Clone the repository:
+   ```
+   git clone https://github.com/nickpiovano/pro-fantasy-rodeo.git
+   cd pro-fantasy-rodeo
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+3. Start the development server:
+   ```
+   npm run dev
+   ```
+
+4. Open your browser and navigate to:
+   ```
+   http://localhost:5173
+   ```
+
+## Project Structure
+
+```
+src/
+├── components/       # UI components
+├── context/          # React context for state management
+├── pages/            # Page components
+├── services/         # API services and data handling
+├── styles/           # Global styles and theme
+└── utils/            # Utility functions
 ```
 
-**Edit a file directly in GitHub**
+## User Flow
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. **Landing Page**: Users learn about the contest, prizes, and entry fee
+2. **Authentication**: Create an account or sign in
+3. **Roster Builder**: Select one contestant for each rodeo event
+4. **Prize Summary**: Review team selections before submission
+5. **Entry Confirmation**: Confirm submission and payment
+6. **Leaderboard**: View contest standings and your position
 
-**Use GitHub Codespaces**
+## Development
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Scripts
 
-## What technologies are used for this project?
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
 
-This project is built with:
+## Roadmap
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- [x] Project Setup and Foundation
+- [x] User Authentication and Account Management
+- [ ] Core Contest Experience
+- [ ] Team Submission and Confirmation
+- [ ] Leaderboard and Post-Entry Experience
+- [ ] Mobile Optimization and Western Theme Implementation
+- [ ] Testing and Quality Assurance
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/79a956a7-26e1-4ec4-8d37-2c261d97b624) and click on Share -> Publish.
+[MIT License](LICENSE)
 
-## Can I connect a custom domain to my Lovable project?
+## Acknowledgments
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- PRCA for partnership and rodeo data
+- All the rodeo fans who participated in testing and feedback
