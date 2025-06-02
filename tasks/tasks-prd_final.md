@@ -86,38 +86,38 @@
   - [x] 3.11 Add validation to prevent incomplete submissions
 
 - [ ] 4.0 Team Submission and Confirmation
-  - [ ] 4.1 Create PrizeSummary page with team review
-  - [ ] 4.2 Implement TeamSummary component for selected contestants
-  - [ ] 4.3 Develop PrizeDisplay component with prize information
-  - [ ] 4.4 Set up payment service integration
-  - [ ] 4.5 Create payment processing UI with $19.95 entry fee
-  - [ ] 4.6 Implement team submission to backend
-  - [ ] 4.7 Create backend endpoints for team submission
-  - [ ] 4.8 Develop EntryConfirmation page with success messaging
-  - [ ] 4.9 Add navigation options to view team or leaderboard
-  - [ ] 4.10 Implement error handling for submission failures
+  - [x] 4.1 Create PrizeSummary page with team review
+  - [x] 4.2 Implement TeamSummary component for selected contestants
+  - [x] 4.3 Develop PrizeDisplay component with prize information
+  - [x] 4.4 Set up payment service integration
+  - [x] 4.5 Create payment processing UI with $19.95 entry fee
+  - [x] 4.6 Implement team submission to backend
+  - [x] 4.7 Create backend endpoints for team submission
+  - [x] 4.8 Develop EntryConfirmation page with success messaging
+  - [x] 4.9 Add navigation options to view team or leaderboard
+  - [x] 4.10 Implement error handling for submission failures
 
 - [ ] 5.0 Leaderboard and Post-Entry Experience
-  - [ ] 5.1 Create Leaderboard page with top teams display
-  - [ ] 5.2 Implement user team highlighting in leaderboard
-  - [ ] 5.3 Add messaging about score update frequency
+  - [x] 5.1 Create Leaderboard page with top teams display
+  - [x] 5.2 Implement user team highlighting in leaderboard
+  - [x] 5.3 Add messaging about score update frequency
   - [ ] 5.4 Create backend endpoints for leaderboard data
   - [ ] 5.5 Implement PRCA data import service for scores
-  - [ ] 5.6 Develop stub for Prize Challenges and Leagues
+  - [x] 5.6 Develop stub for Prize Challenges and Leagues
   - [ ] 5.7 Add re-entry option for existing users
-  - [ ] 5.8 Create team viewing functionality after submission
+  - [x] 5.8 Create team viewing functionality after submission
   - [ ] 5.9 Implement score calculation logic (stubbed)
 
 - [ ] 6.0 Mobile Optimization and Western Theme Implementation
-  - [ ] 6.1 Implement responsive design for all pages
-  - [ ] 6.2 Optimize touch targets for mobile users (≥48px)
-  - [ ] 6.3 Apply Western-themed typography and color palette
-  - [ ] 6.4 Create custom form elements matching the Western theme
-  - [ ] 6.5 Implement mobile-friendly navigation
-  - [ ] 6.6 Add micro-interactions and animations
-  - [ ] 6.7 Ensure proper scrolling behavior on mobile devices
-  - [ ] 6.8 Test and optimize for various screen sizes
-  - [ ] 6.9 Implement accessibility features for all components
+  - [x] 6.1 Implement responsive design for all pages
+  - [x] 6.2 Optimize touch targets for mobile users (≥48px)
+  - [x] 6.3 Apply Western-themed typography and color palette
+  - [x] 6.4 Create custom form elements matching the Western theme
+  - [x] 6.5 Implement mobile-friendly navigation
+  - [x] 6.6 Add micro-interactions and animations
+  - [x] 6.7 Ensure proper scrolling behavior on mobile devices
+  - [x] 6.8 Test and optimize for various screen sizes
+  - [x] 6.9 Implement accessibility features for all components
 
 - [ ] 7.0 Testing and Quality Assurance
   - [ ] 7.1 Create unit tests for core components
