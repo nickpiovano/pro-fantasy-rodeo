@@ -93,11 +93,36 @@ src/
 
 - [x] Project Setup and Foundation
 - [x] User Authentication and Account Management
-- [ ] Core Contest Experience
-- [ ] Team Submission and Confirmation
-- [ ] Leaderboard and Post-Entry Experience
-- [ ] Mobile Optimization and Western Theme Implementation
-- [ ] Testing and Quality Assurance
+- [x] Core Contest Experience
+- [x] Team Submission and Confirmation
+- [x] Leaderboard and Post-Entry Experience
+- [x] Mobile Optimization and Western Theme Implementation
+- [x] Testing and Quality Assurance
+- [x] Mobile Navigation System
+
+## Testing
+
+The application includes comprehensive testing:
+
+- **Unit Tests**: Using Jest and React Testing Library to test individual components
+- **End-to-End Tests**: Using Cypress to test critical user flows
+- **Accessibility Testing**: Ensuring the application is usable by everyone
+
+To run tests:
+
+```bash
+# Run unit tests
+npm test
+
+# Run Cypress tests in the browser
+npm run cy:open
+
+# Run Cypress tests headlessly
+npm run cy:run
+
+# Run end-to-end tests with dev server
+npm run e2e
+```
 
 ## License
 
