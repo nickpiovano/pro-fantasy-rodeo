@@ -7,6 +7,12 @@ import RosterBuilder from '@/components/RosterBuilder';
 import PrizeSummary from '@/components/PrizeSummary';
 import EntryConfirmation from '@/components/EntryConfirmation';
 import Leaderboard from '@/components/Leaderboard';
+import PageContainer from "@/components/PageContainer";
+import HowItWorks from "@/components/HowItWorks";
+import CountdownTimer from "@/components/CountdownTimer";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { useNavigation } from "@/hooks/useNavigation";
 
 export type User = {
   email: string;
@@ -37,6 +43,7 @@ const Index = () => {
   const [currentStep, setCurrentStep] = useState<'landing' | 'auth' | 'roster' | 'summary' | 'confirmation' | 'leaderboard'>('landing');
   const { user, login, isAuthenticated } = useAuth();
   const { teamSelections, setUser, addSelection, clearSelections } = useTeam();
+  const { navigateTo } = useNavigation();
 
   // Handle initial app state based on authentication
   useEffect(() => {
@@ -121,9 +128,55 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black">
-      {renderCurrentStep()}
-    </div>
+    <PageContainer 
+      title="Pro Fantasy Rodeo" 
+      showBackButton={false}
+      fullHeight
+    >
+      <div className="p-4 animate-fade-in">
+        {/* Hero Banner */}
+        <div className="glass-card p-6 mb-6 text-center">
+          <h1 className="text-3xl font-bold text-white mb-2">
+            Pro Fantasy Rodeo
+          </h1>
+          <p className="text-rodeo-tan mb-4">
+            Win a 2024 Ram 1500 & $60K in prizes!
+          </p>
+          <div className="mb-4">
+            <CountdownTimer 
+              endDate={new Date("2024-07-31T23:59:59")} 
+              className="text-white"
+              label="Contest Closes In:"
+            />
+          </div>
+          <Button 
+            onClick={() => navigateTo('/roster', 'Build Your Team')} 
+            size="lg" 
+            className="btn-primary w-full md:w-auto md:px-8"
+          >
+            Build Your Team <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
+
+        {/* How It Works Section */}
+        <div className="glass-card p-6 mb-6">
+          <HowItWorks />
+        </div>
+
+        {/* Entry Fee Section */}
+        <div className="glass-card p-6 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-white mb-3">
+            Entry Fee
+          </h2>
+          <p className="text-rodeo-tan text-xl font-bold mb-2">
+            $19.95
+          </p>
+          <p className="text-white/70 text-sm">
+            One entry per person. All entries must be complete by July 31st.
+          </p>
+        </div>
+      </div>
+    </PageContainer>
   );
 };
 

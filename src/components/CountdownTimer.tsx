@@ -4,6 +4,7 @@ interface CountdownTimerProps {
   endDate?: Date;
   className?: string;
   onComplete?: () => void;
+  label?: string;
 }
 
 interface TimeLeft {
@@ -16,7 +17,8 @@ interface TimeLeft {
 const CountdownTimer = ({ 
   endDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Default 30 days from now
   className, 
-  onComplete 
+  onComplete,
+  label = "Contest Ends In:"
 }: CountdownTimerProps) => {
   const calculateTimeLeft = (): TimeLeft => {
     const difference = endDate.getTime() - new Date().getTime();
@@ -53,7 +55,7 @@ const CountdownTimer = ({
 
   return (
     <div className={`text-center ${className || ''}`}>
-      <p className="text-stone-700 font-semibold mb-3">Contest Ends In:</p>
+      <p className="text-stone-400 font-semibold mb-3">{label}</p>
       <div className="grid grid-cols-4 gap-2">
         {[
           { label: 'Days', value: timeLeft.days },
