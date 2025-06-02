@@ -24,7 +24,7 @@ const ProgressBar = ({
     <div className={className}>
       <div className="flex justify-between items-center mb-2">
         {showText && (
-          <p className="text-red-100 text-sm">
+          <p className="text-white text-sm">
             {label}
           </p>
         )}

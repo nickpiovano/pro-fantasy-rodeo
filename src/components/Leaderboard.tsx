@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -176,7 +175,7 @@ const Leaderboard = ({ userTeamName, onBackToHome }: LeaderboardProps) => {
         </Button>
 
         {/* Contest Info */}
-        <div className="text-center mt-6 text-xs text-stone-400 space-y-1">
+        <div className="text-center mt-6 text-xs text-white space-y-1">
           <p>Contest ends July 31st, 2024 • Winners announced August 5th</p>
           <p>Scores based on official PRCA results • Updated daily at 11 PM CT</p>
         </div>

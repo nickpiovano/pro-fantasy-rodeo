@@ -82,10 +82,10 @@ const LandingPage = ({ onStartEntry }: LandingPageProps) => {
 
           {/* Footer Info */}
           <div className="text-center space-y-2">
-            <p className="text-amber-200 text-sm">
+            <p className="text-white text-sm">
               Partnered with PRCA • Ages 18+ • See rules for details
             </p>
-            <button className="text-amber-300 underline text-sm hover:text-amber-100 transition-colors">
+            <button className="text-white underline text-sm hover:text-amber-100 transition-colors">
               Contest Rules & FAQ
             </button>
           </div>

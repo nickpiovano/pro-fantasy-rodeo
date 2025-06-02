@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -134,7 +133,7 @@ const PrizeSummary = ({ user, teamSelections, onEntrySubmitted, onEditTeam }: Pr
         </Card>
 
         {/* Legal Text */}
-        <div className="text-center text-xs text-stone-500 space-y-2">
+        <div className="text-center text-xs text-white space-y-2">
           <p>
             By submitting your entry, you agree to the official contest rules and terms of service.
           </p>

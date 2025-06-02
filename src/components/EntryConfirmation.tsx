@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -105,7 +104,7 @@ const EntryConfirmation = ({ user, teamSelections, onViewLeaderboard, onBackToHo
         </div>
 
         {/* Contact Info */}
-        <div className="text-center mt-6 text-xs text-stone-500">
+        <div className="text-center mt-6 text-xs text-white">
           <p>Questions? Contact support@profantasyrodeo.com</p>
           <p className="mt-1">Good luck, cowboy! 🤠</p>
         </div>
