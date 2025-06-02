@@ -26,7 +26,7 @@ const HowItWorks = ({ className }: HowItWorksProps) => {
   return (
     <Card className={`card-western ${className || ''}`}>
       <CardHeader>
-        <CardTitle className="text-center text-2xl text-stone-800">
+        <CardTitle className="text-center text-2xl text-white">
           How It Works
         </CardTitle>
       </CardHeader>

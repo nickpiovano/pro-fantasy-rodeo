@@ -146,15 +146,15 @@ const RosterBuilder = ({ onTeamComplete }: RosterBuilderProps) => {
         {/* Team Summary */}
         {selections.length > 0 && (
           <Card className="card-western mt-6 border border-stone-300">
-            <CardHeader>
-              <h2 className="text-lg font-bold text-stone-800">Current Picks</h2>
+            <CardHeader className="bg-gradient-to-r from-red-700 to-red-600">
+              <h2 className="text-lg font-bold text-white">Current Picks</h2>
             </CardHeader>
-            <div className="p-4">
+            <div className="p-4 bg-gradient-to-br from-gray-800 to-stone-900">
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {selections.map((selection) => (
-                  <div key={selection.eventId} className="flex justify-between items-center py-2 border-b border-stone-200">
-                    <span className="text-sm font-medium text-stone-700">{selection.eventName}</span>
-                    <span className="text-sm text-stone-900 font-bold">{selection.contestantName}</span>
+                  <div key={selection.eventId} className="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span className="text-sm font-medium text-gray-300">{selection.eventName}</span>
+                    <span className="text-sm text-white font-bold">{selection.contestantName}</span>
                   </div>
                 ))}
               </div>
