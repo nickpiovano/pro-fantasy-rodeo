@@ -1,134 +1,108 @@
-# Pro Fantasy Rodeo – 'Christmas in July' 🐎
+# Pro Fantasy Rodeo – 'Christmas in July' 🤠🐎
 
-A modern, mobile-first fantasy rodeo application that allows users to participate in PRCA's 'Christmas in July' fantasy rodeo contest.
+A premium fantasy sports platform for rodeo enthusiasts featuring PRCA's 'Christmas in July' contest with $60,000 in cash prizes and a 2024 Ram 1500 truck grand prize.
 
-<!-- 
 ![Pro Fantasy Rodeo](https://github.com/nickpiovano/pro-fantasy-rodeo/raw/main/public/screenshot.png)
-NOTE: Add a screenshot of the application here once it's running 
--->
 
-## Overview
+## 🏆 Overview
 
-Pro Fantasy Rodeo is a web application that enables rodeo fans to enter fantasy contests by selecting contestants across different rodeo events. The flagship 'Christmas in July' contest lets users pay $19.95 to build their dream team of rodeo competitors and compete for major prizes including a 2024 Ram 1500 truck and $60,000 in cash prizes.
+Pro Fantasy Rodeo brings the thrill of fantasy sports to professional rodeo. Our flagship 'Christmas in July' contest lets fans build their dream team of rodeo athletes for $19.95 entry, competing for substantial prizes while experiencing the excitement of PRCA events in a new interactive way.
 
-## Features
+## ✨ Key Features
 
-- **User Authentication**: Easy account creation and login for returning users
-- **Roster Building**: Select one contestant per rodeo event with intuitive UI
-- **Mobile-First Design**: Optimized for mobile devices with a Western-themed interface
-- **Live Leaderboard**: Track your progress against other competitors
-- **Western-Themed UI**: Authentic rodeo styling and design elements
+- **Authentic Western Experience**: Immersive rodeo-themed design with authentic styling
+- **Intuitive Team Building**: Select top contestants across multiple rodeo disciplines
+- **Real-time Leaderboard**: Track your position with live updates during events
+- **Detailed Contestant Stats**: Make informed selections with comprehensive performance data
+- **Secure Transactions**: Reliable payment processing and account management
+- **Responsive Design**: Optimized for all devices with mobile-first approach
+- **Social Sharing**: Share your team and standings with fellow rodeo fans
 
-## Tech Stack
+## 🛠️ Technology Stack
 
-- **Frontend**: React, TypeScript, Vite
-- **Styling**: Tailwind CSS with custom Western theme
-- **State Management**: React Context API
-- **Data Fetching**: React Query
-- **Routing**: React Router
-- **Backend**: API integration (PRCA data)
-- **Authentication**: Custom auth with secure storage
+- **Frontend**: React 18, TypeScript, Vite
+- **UI Framework**: Tailwind CSS with custom western theme components
+- **State Management**: React Context API with custom hooks
+- **Data Fetching**: React Query for efficient API integration
+- **Authentication**: JWT with secure storage and session management
+- **Animations**: Framer Motion for fluid UI transitions
+- **Testing**: Jest, React Testing Library, and Cypress
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ installed
-- npm or yarn package manager
+- Node.js 18+
+- npm or yarn
 
-### Installation
+### Quick Start
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/nickpiovano/pro-fantasy-rodeo.git
-   cd pro-fantasy-rodeo
-   ```
+```bash
+# Clone repository
+git clone https://github.com/nickpiovano/pro-fantasy-rodeo.git
+cd pro-fantasy-rodeo
 
-2. Install dependencies:
-   ```
-   npm install
-   ```
+# Install dependencies
+npm install
 
-3. Start the development server:
-   ```
-   npm run dev
-   ```
+# Start development server
+npm run dev
 
-4. Open your browser and navigate to:
-   ```
-   http://localhost:5173
-   ```
-
-## Project Structure
-
+# Build for production
+npm run build
 ```
+
+## 📁 Project Structure
 src/
-├── components/       # UI components
-├── context/          # React context for state management
-├── pages/            # Page components
-├── services/         # API services and data handling
-├── styles/           # Global styles and theme
-└── utils/            # Utility functions
-```
+├── components/ # Reusable UI components
+├── context/ # State management
+├── hooks/ # Custom React hooks
+├── layouts/ # Page layout components
+├── pages/ # Main application pages
+├── services/ # API and external services
+├── styles/ # Global styles and theming
+├── types/ # TypeScript type definitions
+└── utils/ # Helper functions and utilities
 
-## User Flow
 
-1. **Landing Page**: Users learn about the contest, prizes, and entry fee
-2. **Authentication**: Create an account or sign in
-3. **Roster Builder**: Select one contestant for each rodeo event
-4. **Prize Summary**: Review team selections before submission
-5. **Entry Confirmation**: Confirm submission and payment
-6. **Leaderboard**: View contest standings and your position
+## 📋 Documentation
 
-## Development
+- [Live Prototype]([./docs/assumptions.md](https://pro-fantasy-rodeo.lovable.app/)) - Clickable
+- [Assumptions](./docs/assumptions.md) - Initial project assumptions
+- [PRD Final](./docs/prd_final.md) - Product Requirements Document
+- [Task Breakdown](./docs/tasks-prd_final.md) - Development task breakdown
+- [UI Redesign Tasks](./docs/tasks-prd-modern-ui-redesign.md) - UI modernization plan
 
-### Scripts
+## 📱 User Experience
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run lint` - Run ESLint
-- `npm run preview` - Preview production build
+1. **Discover**: Learn about the contest, prizes, and entry details
+2. **Build Team**: Select contestants across multiple rodeo events
+3. **Submit Entry**: Review selections and complete payment
+4. **Track Performance**: Follow your team's performance on the leaderboard
 
-## Roadmap
-
-- [x] Project Setup and Foundation
-- [x] User Authentication and Account Management
-- [x] Core Contest Experience
-- [x] Team Submission and Confirmation
-- [x] Leaderboard and Post-Entry Experience
-- [x] Mobile Optimization and Western Theme Implementation
-- [x] Testing and Quality Assurance
-- [x] Mobile Navigation System
-
-## Testing
-
-The application includes comprehensive testing:
-
-- **Unit Tests**: Using Jest and React Testing Library to test individual components
-- **End-to-End Tests**: Using Cypress to test critical user flows
-- **Accessibility Testing**: Ensuring the application is usable by everyone
-
-To run tests:
+## 🧪 Testing
 
 ```bash
 # Run unit tests
 npm test
 
-# Run Cypress tests in the browser
-npm run cy:open
-
-# Run Cypress tests headlessly
-npm run cy:run
-
-# Run end-to-end tests with dev server
+# Run end-to-end tests
 npm run e2e
+
+# Run accessibility tests
+npm run test:a11y
 ```
 
-## License
+## 🔜 Roadmap
 
-[MIT License](LICENSE)
-
-## Acknowledgments
-
-- PRCA for partnership and rodeo data
-- All the rodeo fans who participated in testing and feedback
+- [x] Core platform launch with Christmas in July contest (using dummy data)
+- [x] Mobile-optimized experience
+- [x] Western-themed UI implementation
+- [x] Comprehensive leaderboard experience
+- [x] Smooth team-buiilder experience
+- [ ] User authentication
+- [ ] Payment flows
+- [ ] Social sharing capabilities
+- [ ] Additional PRCA event integrations
+- [ ] Real data integrations
+- [ ] Enhanced statistics and analytics
