@@ -6,6 +6,8 @@ A premium fantasy sports platform for rodeo enthusiasts featuring PRCA's 'Christ
 
 Pro Fantasy Rodeo brings the thrill of fantasy sports to professional rodeo. Our flagship 'Christmas in July' contest lets fans build their dream team of rodeo athletes for $19.95 entry, competing for substantial prizes while experiencing the excitement of PRCA events in a new interactive way.
 
+[Clickable live prototype](https://pro-fantasy-rodeo.lovable.app/) - View the interactive demo
+
 ## ✨ Key Features
 
 - **Authentic Western Experience**: Immersive rodeo-themed design with authentic styling
