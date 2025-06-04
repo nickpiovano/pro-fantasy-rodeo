@@ -67,11 +67,11 @@ src/
 
 ## 📋 Documentation
 
-- [https://pro-fantasy-rodeo.lovable.app/]([https://pro-fantasy-rodeo.lovable.app/](https://pro-fantasy-rodeo.lovable.app/)) - Clickable live prototype
-- [Assumptions](./docs/assumptions.md) - Initial project assumptions
-- [PRD Final](./docs/prd_final.md) - Product Requirements Document
-- [Task Breakdown](./docs/tasks-prd_final.md) - Development task breakdown
-- [UI Redesign Tasks](./docs/tasks-prd-modern-ui-redesign.md) - UI modernization plan
+- [Clickable live prototype](https://pro-fantasy-rodeo.lovable.app/) - View the interactive demo
+- [Assumptions](./tasks/assumptions.md) - Initial project assumptions
+- [PRD Final](./tasks/prd_final.md) - Product Requirements Document
+- [Task Breakdown](./tasks/tasks-prd_final.md) - Development task breakdown
+- [UI Redesign Tasks](./tasks/tasks-prd-modern-ui-redesign.md) - UI modernization plan
 
 ## 📱 User Experience
 
