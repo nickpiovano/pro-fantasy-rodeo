@@ -21,7 +21,7 @@ const Leaderboard = () => {
       <div className="p-4">
         <div className="glass-card p-4 mb-4">
           <h2 className="text-xl font-bold text-white mb-4 text-center">
-            Christmas in July - Leaderboard
+            Christmas in July - Standings
           </h2>
           
           <div className="bg-stone-800/50 rounded-lg p-3 mb-3 text-stone-300 text-sm grid grid-cols-12 gap-2">
@@ -60,7 +60,7 @@ const Leaderboard = () => {
           </div>
           
           <div className="mt-6 text-center text-stone-400 text-sm">
-            Scores updated daily at 12:00 PM CT
+            Scores updated hourly.
           </div>
         </div>
       </div>

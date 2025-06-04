@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, AlertTriangle } from 'lucide-react';
 import type { User, TeamSelection } from '@/pages/Index';
+import SalaryTracker from './SalaryTracker';
+import contestService from '@/services/contest';
+import { formatSalary } from '@/services/contest';
 
 interface PrizeSummaryProps {
   user: User;
@@ -14,8 +17,39 @@ interface PrizeSummaryProps {
 
 const PrizeSummary = ({ user, teamSelections, onEntrySubmitted, onEditTeam }: PrizeSummaryProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [totalSalary, setTotalSalary] = useState(0);
+  const [salaryCap, setSalaryCap] = useState(800000);
+  const [isOverSalaryCap, setIsOverSalaryCap] = useState(false);
+
+  // Calculate total salary
+  useEffect(() => {
+    const newTotalSalary = teamSelections.reduce((total, selection) => total + selection.salary, 0);
+    setTotalSalary(newTotalSalary);
+    setIsOverSalaryCap(newTotalSalary > salaryCap);
+  }, [teamSelections, salaryCap]);
+
+  // Fetch salary cap from active contest
+  useEffect(() => {
+    const fetchSalaryCap = async () => {
+      try {
+        const activeContest = await contestService.getActiveContests();
+        if (activeContest && typeof activeContest === 'object' && 'salaryCap' in activeContest) {
+          setSalaryCap(activeContest.salaryCap as number);
+        }
+      } catch (error) {
+        console.error('Error fetching salary cap:', error);
+      }
+    };
+
+    fetchSalaryCap();
+  }, []);
 
   const handleSubmitEntry = async () => {
+    // Don't allow submission if over salary cap
+    if (isOverSalaryCap) {
+      return;
+    }
+
     setIsSubmitting(true);
     
     // Simulate payment processing
@@ -40,6 +74,22 @@ const PrizeSummary = ({ user, teamSelections, onEntrySubmitted, onEditTeam }: Pr
           </CardHeader>
         </Card>
 
+        {/* Salary Tracker */}
+        <Card className="card-western border-2 border-amber-400 mb-6">
+          <CardHeader className="bg-gradient-to-r from-amber-100 to-yellow-100">
+            <CardTitle className="text-lg text-stone-800">
+              Team Salary
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 bg-gradient-to-br from-gray-800 to-stone-900">
+            <SalaryTracker 
+              currentSalary={totalSalary} 
+              salaryCap={salaryCap} 
+              showWarning={isOverSalaryCap}
+            />
+          </CardContent>
+        </Card>
+
         {/* Team Selections */}
         <Card className="card-western border-2 border-amber-400 mb-6">
           <CardHeader className="bg-gradient-to-r from-amber-100 to-yellow-100">
@@ -52,13 +102,26 @@ const PrizeSummary = ({ user, teamSelections, onEntrySubmitted, onEditTeam }: Pr
               <div key={selection.eventId} className="flex items-center justify-between p-3 bg-white rounded-lg border border-stone-200 shadow-sm">
                 <div>
                   <p className="font-semibold text-stone-800">{selection.eventName}</p>
-                  <p className="text-stone-600 text-sm">{selection.contestantName}</p>
+                  <div className="flex items-center">
+                    <p className="text-stone-600 text-sm">{selection.contestantName}</p>
+                    <span className="ml-2 text-xs font-medium text-red-600">
+                      {formatSalary(selection.salary)}
+                    </span>
+                  </div>
                 </div>
                 <Badge className="bg-red-600 text-white">
                   #{index + 1}
                 </Badge>
               </div>
             ))}
+
+            {/* Total Salary */}
+            <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg border border-stone-300 shadow-sm mt-4">
+              <p className="font-bold text-stone-800">Total Salary</p>
+              <p className={`font-bold ${isOverSalaryCap ? 'text-red-600' : 'text-green-600'}`}>
+                {formatSalary(totalSalary)}
+              </p>
+            </div>
           </CardContent>
         </Card>
 
@@ -106,10 +169,17 @@ const PrizeSummary = ({ user, teamSelections, onEntrySubmitted, onEditTeam }: Pr
             </div>
             
             <div className="space-y-3">
+              {isOverSalaryCap && (
+                <div className="p-3 bg-red-100 border border-red-300 rounded-lg flex items-center text-red-700 mb-2">
+                  <AlertTriangle className="h-5 w-5 mr-2 flex-shrink-0" />
+                  <p className="text-sm">Your team is over the salary cap. Please edit your team before submitting.</p>
+                </div>
+              )}
+              
               <Button
                 onClick={handleSubmitEntry}
-                disabled={isSubmitting}
-                className="btn-rodeo w-full text-xl py-6"
+                disabled={isSubmitting || isOverSalaryCap}
+                className={`btn-rodeo w-full text-xl py-6 ${isOverSalaryCap ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {isSubmitting ? (
                   <div className="flex items-center">

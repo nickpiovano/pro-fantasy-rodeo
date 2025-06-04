@@ -1,5 +1,4 @@
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -15,6 +14,7 @@ import Account from "./pages/Account";
 import Summary from "./pages/Summary";
 import Confirmation from "./pages/Confirmation";
 import NotFound from "./pages/NotFound";
+import ToastDemo from "./pages/ToastDemo";
 
 // Import navigation styles
 import "./styles/navigation.css";
@@ -29,7 +29,6 @@ const App = () => (
           <NavigationProvider>
             <TooltipProvider>
               <Toaster />
-              <Sonner />
               <div className="app-container">
                 <Routes>
                   <Route path="/" element={<Index />} />
@@ -39,6 +38,7 @@ const App = () => (
                   <Route path="/account" element={<Account />} />
                   <Route path="/summary" element={<Summary />} />
                   <Route path="/confirmation" element={<Confirmation />} />
+                  <Route path="/toast-demo" element={<ToastDemo />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>

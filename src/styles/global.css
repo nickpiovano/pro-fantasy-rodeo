@@ -168,6 +168,12 @@
   --z-popover: 400;
   --z-toast: 500;
   --z-tooltip: 600;
+  
+  /* Accessibility Settings */
+  --motion-preference: no-preference;
+  --font-size-multiplier: 1;
+  --contrast-mode: normal;
+  --effects-level: normal;
 }
 
 /* Base Styles */
@@ -180,7 +186,7 @@
 html,
 body {
   font-family: var(--font-family-body);
-  font-size: var(--font-size-md);
+  font-size: calc(var(--font-size-md) * var(--font-size-multiplier));
   line-height: var(--line-height-normal);
   color: var(--color-gray-900);
   background-color: var(--color-offwhite);
@@ -197,27 +203,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: var(--font-size-4xl);
+  font-size: calc(var(--font-size-4xl) * var(--font-size-multiplier));
 }
 
 h2 {
-  font-size: var(--font-size-3xl);
+  font-size: calc(var(--font-size-3xl) * var(--font-size-multiplier));
 }
 
 h3 {
-  font-size: var(--font-size-2xl);
+  font-size: calc(var(--font-size-2xl) * var(--font-size-multiplier));
 }
 
 h4 {
-  font-size: var(--font-size-xl);
+  font-size: calc(var(--font-size-xl) * var(--font-size-multiplier));
 }
 
 h5 {
-  font-size: var(--font-size-lg);
+  font-size: calc(var(--font-size-lg) * var(--font-size-multiplier));
 }
 
 h6 {
-  font-size: var(--font-size-md);
+  font-size: calc(var(--font-size-md) * var(--font-size-multiplier));
 }
 
 p {
@@ -341,6 +347,20 @@ button {
   animation: scale var(--duration-normal) ease-out;
 }
 
+/* Skeleton loading animations */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background-size: 600px 100%;
+}
+
+.skeleton-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-pulse-western {
+  animation: pulse-western 1.5s ease-in-out infinite;
+}
+
 /* Keyframes */
 @keyframes fade {
   from { opacity: 0; }
@@ -355,6 +375,16 @@ button {
 @keyframes scale {
   from { transform: scale(0.95); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes pulse-western {
+  0%, 100% { opacity: 0.5; background-color: rgba(212, 175, 55, 0.1); }
+  50% { opacity: 0.8; background-color: rgba(212, 175, 55, 0.2); }
 }
 
 /* Media Queries */
@@ -376,4 +406,78 @@ button {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Accessibility Classes */
+/* Reduced motion */
+:root[style*="--motion-preference:reduce"],
+.reduce-motion {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Reduced visual effects */
+.reduce-effects {
+  --shadow-sm: 0 1px 1px rgba(15, 13, 11, 0.05) !important;
+  --shadow-md: 0 1px 2px rgba(15, 13, 11, 0.1) !important;
+  --shadow-lg: 0 1px 3px rgba(15, 13, 11, 0.1) !important;
+  --shadow-xl: 0 1px 4px rgba(15, 13, 11, 0.1) !important;
+  --shadow-2xl: 0 1px 5px rgba(15, 13, 11, 0.15) !important;
+  --color-glass-light: rgba(255, 255, 255, 0.7) !important;
+  --color-glass-medium: rgba(255, 255, 255, 0.8) !important;
+  --color-glass-heavy: rgba(255, 255, 255, 0.9) !important;
+}
+
+.reduce-effects .glass {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* High contrast mode */
+.high-contrast {
+  --color-primary-500: #B50D28 !important;
+  --color-primary-600: #9A0C23 !important;
+  --color-secondary-500: #142036 !important;
+  --color-secondary-600: #0F1A2C !important;
+  --color-accent-500: #B89126 !important;
+  --color-accent-600: #9D7D21 !important;
+  --color-gray-500: #555555 !important;
+  --color-gray-600: #444444 !important;
+  --color-gray-700: #333333 !important;
+  --color-gray-800: #222222 !important;
+  --color-gray-900: #111111 !important;
+}
+
+.high-contrast a,
+.high-contrast button,
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+  outline: 2px solid transparent;
+}
+
+.high-contrast a:focus,
+.high-contrast button:focus,
+.high-contrast input:focus,
+.high-contrast select:focus,
+.high-contrast textarea:focus {
+  outline: 2px solid var(--color-primary-500) !important;
+  outline-offset: 2px !important;
+}
+
+/* Font size multiplier utility classes */
+.text-size-normal {
+  --font-size-multiplier: 1;
+}
+
+.text-size-large {
+  --font-size-multiplier: 1.25;
+}
+
+.text-size-xlarge {
+  --font-size-multiplier: 1.5;
 } 

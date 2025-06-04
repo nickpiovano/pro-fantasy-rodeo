@@ -1,11 +1,12 @@
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigation } from '@/hooks/useNavigation';
+import { ButtonVariant, ButtonSize } from '@/components/ui/button-new';
 
 interface BackButtonProps {
   className?: string;
-  variant?: 'default' | 'outline' | 'ghost';
-  size?: 'default' | 'sm' | 'lg';
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   label?: string;
   showLabel?: boolean;
   onCustomBack?: () => void;
@@ -14,7 +15,7 @@ interface BackButtonProps {
 const BackButton = ({
   className = '',
   variant = 'ghost',
-  size = 'default',
+  size = 'md',
   label = 'Back',
   showLabel = true,
   onCustomBack
@@ -38,9 +39,9 @@ const BackButton = ({
       onClick={handleClick}
       className={`group ${className}`}
       aria-label="Go back"
+      leftIcon={<ArrowLeft className="h-5 w-5 group-hover:-translate-x-1 transition-transform" />}
     >
-      <ArrowLeft className="h-5 w-5 mr-1 group-hover:-translate-x-1 transition-transform" />
-      {showLabel && <span>{label}</span>}
+      {showLabel && label}
     </Button>
   );
 };
