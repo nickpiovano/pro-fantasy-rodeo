@@ -87,3 +87,7 @@
 - Clean, mobile-first UI that feels modern and fun
 - Better guidance and deadlines on when/what to enter
 - Fix the games list to clearly show upcoming vs. past
+
+## 7. Ammendments
+
+- This document outlines the assumptions made at the point when work began. Since then, many assumptions have changed and must be updated here in the future in an assumptions_updated.md file
