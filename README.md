@@ -67,7 +67,7 @@ src/
 
 ## 📋 Documentation
 
-- [Live Prototype]([./docs/assumptions.md](https://pro-fantasy-rodeo.lovable.app/)) - Clickable
+- [https://pro-fantasy-rodeo.lovable.app/]([url](https://pro-fantasy-rodeo.lovable.app/)) - Clickable live prototype
 - [Assumptions](./docs/assumptions.md) - Initial project assumptions
 - [PRD Final](./docs/prd_final.md) - Product Requirements Document
 - [Task Breakdown](./docs/tasks-prd_final.md) - Development task breakdown
