@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button-new';
-import { ArrowRight, ArrowLeft, AlertTriangle, Users, DollarSign } from 'lucide-react';
+import { ArrowRight, ArrowLeft, AlertTriangle, Users, DollarSign, ChevronLeft } from 'lucide-react';
 import type { Event, TeamSelection } from '@/pages/Index';
 import ProgressBar from './ProgressBar';
 import SalaryTracker from './SalaryTracker';
@@ -9,6 +9,8 @@ import EventCard from './EventCard';
 import contestService from '@/services/contest';
 import { formatSalary } from '@/services/contest';
 import { Loader2 } from 'lucide-react';
+import { useNavigation } from '@/hooks/useNavigation';
+import PageContainer from '@/components/PageContainer';
 
 interface RosterBuilderProps {
   onTeamComplete: (selections: TeamSelection[]) => void;
@@ -48,6 +50,7 @@ export const formatCurrency = (amount: number): string => {
 };
 
 const RosterBuilder = ({ onTeamComplete }: RosterBuilderProps) => {
+  const { navigateTo } = useNavigation();
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const [selections, setSelections] = useState<TeamSelection[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
@@ -111,59 +114,70 @@ const RosterBuilder = ({ onTeamComplete }: RosterBuilderProps) => {
     }
   }, [selections, showSalaryWarning, salaryCap]);
 
+  const handleBackToTeams = () => {
+    navigateTo('/teams', 'Teams');
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="h-12 w-12 animate-spin text-red-600 mx-auto mb-4" />
-          <p className="text-white font-semibold">Loading events...</p>
+      <PageContainer title="Build Your Team">
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <Loader2 className="h-12 w-12 animate-spin text-red-600 mx-auto mb-4" />
+            <p className="text-white font-semibold">Loading events...</p>
+          </div>
         </div>
-      </div>
+      </PageContainer>
     );
   }
 
   if (error || events.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <Card className="card-western border-2 border-red-600 max-w-md w-full">
-          <CardHeader className="bg-gradient-to-r from-red-700 to-red-600 text-white text-center">
-            <h2 className="text-xl font-bold">Something went wrong</h2>
-            <p className="text-red-100 text-sm">{error || 'No events available'}</p>
-            <Button 
-              onClick={() => window.location.reload()} 
-              variant="secondary"
-              className="mt-4 bg-white text-red-800 hover:bg-gray-100"
-            >
-              Try Again
-            </Button>
-          </CardHeader>
-        </Card>
-      </div>
+      <PageContainer title="Build Your Team">
+        <div className="min-h-screen flex items-center justify-center px-4">
+          <Card className="card-western border-2 border-red-600 max-w-md w-full">
+            <CardHeader className="bg-gradient-to-r from-red-700 to-red-600 text-white text-center">
+              <h2 className="text-xl font-bold">Something went wrong</h2>
+              <p className="text-red-100 text-sm">{error || 'No events available'}</p>
+              <Button 
+                onClick={() => window.location.reload()} 
+                variant="secondary"
+                className="mt-4 bg-white text-red-800 hover:bg-gray-100"
+              >
+                Try Again
+              </Button>
+            </CardHeader>
+          </Card>
+        </div>
+      </PageContainer>
     );
   }
 
   const currentEvent = events[currentEventIndex];
   if (!currentEvent) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <Card className="card-western border-2 border-red-600 max-w-md w-full">
-          <CardHeader className="bg-gradient-to-r from-red-700 to-red-600 text-white text-center">
-            <h2 className="text-xl font-bold">Event not found</h2>
-            <p className="text-red-100 text-sm">Unable to load the current event</p>
-            <Button 
-              onClick={() => window.location.reload()} 
-              variant="secondary"
-              className="mt-4 bg-white text-red-800 hover:bg-gray-100"
-            >
-              Try Again
-            </Button>
-          </CardHeader>
-        </Card>
-      </div>
+      <PageContainer title="Build Your Team">
+        <div className="min-h-screen flex items-center justify-center px-4">
+          <Card className="card-western border-2 border-red-600 max-w-md w-full">
+            <CardHeader className="bg-gradient-to-r from-red-700 to-red-600 text-white text-center">
+              <h2 className="text-xl font-bold">Event not found</h2>
+              <p className="text-red-100 text-sm">Unable to load the current event</p>
+              <Button 
+                onClick={() => window.location.reload()} 
+                variant="secondary"
+                className="mt-4 bg-white text-red-800 hover:bg-gray-100"
+              >
+                Try Again
+              </Button>
+            </CardHeader>
+          </Card>
+        </div>
+      </PageContainer>
     );
   }
   
   const isLastEvent = currentEventIndex === events.length - 1;
+  const isFirstEvent = currentEventIndex === 0;
   const hasSelectionForCurrentEvent = selections.some(s => s.eventId === currentEvent.id);
   const isOverSalaryCap = totalSalary > salaryCap;
 
@@ -203,134 +217,145 @@ const RosterBuilder = ({ onTeamComplete }: RosterBuilderProps) => {
     }
   };
 
-  const selectedContestantId = selections.find(s => s.eventId === currentEvent.id)?.contestantId || null;
+  const currentEventNumber = currentEventIndex + 1;
+  const totalEvents = events.length;
+  const selectedContestant = selections.find(s => s.eventId === currentEvent.id);
+  const selectedContestantId = selectedContestant?.contestantId || null;
 
   return (
-    <div className="min-h-screen px-4 py-8">
-      <div className="max-w-4xl mx-auto animate-fade-in">
-        {/* Header with Progress */}
-        <Card className="card-western border-2 border-red-600 mb-6 overflow-hidden shadow-lg">
-          <CardHeader className="bg-gradient-to-r from-red-700 to-red-600 text-white p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h1 className="text-2xl font-bold">Build Your Team</h1>
-              <div className="text-sm bg-red-800 px-3 py-1 rounded-full">
-                Event {currentEventIndex + 1} of {events.length}
-              </div>
-            </div>
-            <ProgressBar 
-              value={selections.length} 
-              max={events.length} 
-              showValue={false}
-              label="Select one contestant per event"
-              size="md"
-              variant="western"
-            />
-          </CardHeader>
-          
-          {/* Salary Tracker */}
-          <CardContent className="p-6 bg-gradient-to-br from-gray-900 to-gray-800">
-            <SalaryTracker 
-              key={`salary-tracker-${warningKey}`} // Force re-render when warning is triggered
-              currentSalary={totalSalary} 
-              salaryCap={salaryCap} 
-              showWarning={showSalaryWarning}
-              selectionsCount={selections.length}
-            />
-          </CardContent>
-        </Card>
-
-        {/* Current Event */}
-        <EventCard 
-          event={currentEvent}
-          selectedContestantId={selectedContestantId}
-          onContestantSelect={handleContestantSelect}
-          className="mb-6"
-        />
-
-        {/* Navigation */}
-        <div className="flex flex-col sm:flex-row gap-3">
-          {currentEventIndex > 0 && (
-            <Button
-              onClick={handlePrevious}
-              variant="outline"
-              className="sm:flex-1 py-3 border-2 border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
-              leftIcon={<ArrowLeft className="h-4 w-4" />}
-            >
-              Previous Event
-            </Button>
-          )}
-          
+    <PageContainer title="Build Your Team">
+      <div className="p-4 pb-24">
+        {/* Header with back button */}
+        <div className="mb-4 flex items-center">
           <Button
-            onClick={handleNext}
-            disabled={!hasSelectionForCurrentEvent || isOverSalaryCap}
-            variant="primary"
-            className={`sm:flex-1 py-3 text-white font-bold ${
-              isLastEvent ? 'bg-red-600 hover:bg-red-700 text-lg' : ''
-            } ${
-              isOverSalaryCap ? 'bg-red-700 hover:bg-red-800 opacity-80 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'
-            }`}
-            rightIcon={<ArrowRight className="h-5 w-5" />}
+            variant="ghost"
+            className="text-gray-400 hover:text-white"
+            leftIcon={<ChevronLeft className="h-4 w-4" />}
+            onClick={handleBackToTeams}
           >
-            {isLastEvent ? 'BUILD YOUR TEAM' : 'Next Event'}
+            Back to Teams
           </Button>
         </div>
-
+        
+        {/* Progress Bar */}
+        <div className="mb-6">
+          <ProgressBar 
+            value={(currentEventNumber / totalEvents) * 100}
+            max={100}
+            label={`Event ${currentEventNumber} of ${totalEvents}`}
+          />
+        </div>
+        
+        {/* Salary Tracker */}
+        <div className="mb-6">
+          <SalaryTracker 
+            currentSalary={totalSalary}
+            salaryCap={salaryCap}
+            showWarning={showSalaryWarning}
+            selectionsCount={selections.length}
+            key={`salary-tracker-${warningKey}`}
+          />
+        </div>
+        
+        {/* Choose Contestant Card */}
+        <Card className="card-western border-2 border-red-600 mb-6">
+          <CardHeader className="bg-gradient-to-r from-red-700 to-red-600 text-white">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold">
+                {currentEvent.name}
+              </h2>
+              <div className="flex space-x-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-red-800"
+                  leftIcon={<ArrowLeft className="h-4 w-4" />}
+                  onClick={handlePrevious}
+                  disabled={isFirstEvent}
+                >
+                  Previous
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:bg-red-800"
+                  rightIcon={<ArrowRight className="h-4 w-4" />}
+                  onClick={handleNext}
+                  disabled={!hasSelectionForCurrentEvent || (isOverSalaryCap && isLastEvent)}
+                >
+                  {isLastEvent ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="p-4 bg-gray-900">
+            <p className="text-gray-300 mb-4">
+              Select one contestant from this event for your team.
+            </p>
+            
+            <div className="space-y-3">
+              {currentEvent.contestants.map(contestant => (
+                <div 
+                  key={contestant.id}
+                  className={`p-3 rounded-lg border cursor-pointer transition-colors ${
+                    selectedContestantId === contestant.id 
+                      ? 'bg-gray-800 border-red-500' 
+                      : 'bg-gray-800 border-gray-700 hover:border-gray-500'
+                  }`}
+                  onClick={() => handleContestantSelect(contestant.id, contestant.name, contestant.salary)}
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="font-medium text-white">{contestant.name}</p>
+                      <p className="text-sm text-gray-400">Rank: #{contestant.rank}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-amber-400">{formatSalary(contestant.salary)}</p>
+                      {selectedContestantId === contestant.id && (
+                        <div className="mt-1 text-xs text-green-400">Selected</div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+        
+        {/* Navigation Buttons */}
+        <div className="flex justify-between mt-6">
+          <Button 
+            variant="outline" 
+            className="border-gray-700 text-gray-300 hover:bg-gray-800"
+            leftIcon={<ArrowLeft className="h-4 w-4" />}
+            onClick={handlePrevious}
+            disabled={isFirstEvent}
+          >
+            Previous Event
+          </Button>
+          
+          <Button 
+            variant="primary"
+            className="bg-red-600 hover:bg-red-700 text-white"
+            rightIcon={<ArrowRight className="h-4 w-4" />}
+            onClick={handleNext}
+            disabled={!hasSelectionForCurrentEvent || (isOverSalaryCap && isLastEvent)}
+          >
+            {isLastEvent ? 'Complete Team' : 'Next Event'}
+          </Button>
+        </div>
+        
         {/* Warning for over salary cap */}
         {isOverSalaryCap && (
-          <div className="mt-4 bg-red-900/50 border border-red-500 rounded-lg p-4 flex items-center text-red-200">
-            <AlertTriangle className="h-5 w-5 text-red-300 mr-2 flex-shrink-0" />
-            <p className="text-sm">
-              Your team is over the salary cap of {formatSalary(salaryCap)}. Please adjust your selections.
+          <div className="mt-4 p-3 bg-red-900/30 border border-red-700 rounded-lg flex items-center">
+            <AlertTriangle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0" />
+            <p className="text-red-300 text-sm">
+              Your team is over the salary cap. Please adjust your selections before continuing.
             </p>
           </div>
         )}
-
-        {/* Team Summary */}
-        {selections.length > 0 && (
-          <div className="mt-8">
-            <div className="flex items-center mb-4">
-              <Users className="h-5 w-5 text-red-400 mr-2" />
-              <h2 className="text-lg font-semibold text-white">Current Selections</h2>
-            </div>
-            <Card className="bg-gray-900 border border-gray-700">
-              <CardContent className="p-4">
-                <div className="grid grid-cols-12 text-xs text-gray-300 p-2 border-b border-gray-700 bg-gray-800/50">
-                  <div className="col-span-5 font-semibold">Contestant</div>
-                  <div className="col-span-4 font-semibold">Event</div>
-                  <div className="col-span-3 text-right font-semibold">Salary</div>
-                </div>
-                <div className="divide-y divide-gray-800">
-                  {selections.map((selection, index) => (
-                    <div key={index} className="grid grid-cols-12 p-3 items-center">
-                      <div className="col-span-5 font-medium text-white">{selection.contestantName}</div>
-                      <div className="col-span-4 text-sm text-gray-400">{selection.eventName}</div>
-                      <div className="col-span-3 text-right text-amber-400 font-semibold">
-                        {formatSalary(selection.salary)}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="mt-4 p-3 bg-gray-800/50 rounded-lg border border-gray-700">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <DollarSign className="h-5 w-5 text-green-400 mr-2" />
-                      <p className="text-sm font-medium text-white">Potential Earnings</p>
-                    </div>
-                    <p className="text-sm text-gray-400">
-                      Up to <span className="text-green-400 font-bold">{formatCurrency(100000 * selections.length)}</span>
-                    </p>
-                  </div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    1st: $100K | 2nd-3rd: $17.5K | 4th: $5K | 5th-9th: $500
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

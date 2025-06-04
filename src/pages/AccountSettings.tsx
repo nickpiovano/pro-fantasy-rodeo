@@ -7,16 +7,17 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { User, CreditCard, Settings, ChevronRight, Plus, Edit, Save } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
 
 const AccountSettings = () => {
   return (
     <PageContainer title="Account Settings">
       <div className="p-4 max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold text-white mb-6">Account Settings</h1>
+        <PageHeader title="Account Settings" />
         
         {/* Profile Information */}
-        <Card className="border border-gray-700 mb-6">
-          <CardHeader className="border-b border-gray-800 bg-gray-900">
+        <Card className="border border-gray-700 mb-6 bg-gray-900">
+          <CardHeader className="border-b border-gray-700 bg-gray-800/70">
             <div className="flex items-center">
               <User className="h-5 w-5 text-red-500 mr-2" aria-hidden="true" />
               <CardTitle className="text-white">Profile Information</CardTitle>
@@ -30,7 +31,7 @@ const AccountSettings = () => {
               <div>
                 <Button 
                   variant="outline" 
-                  className="text-sm border-gray-600 text-gray-300 hover:bg-gray-800"
+                  className="text-sm border-gray-600 text-white hover:bg-gray-800"
                   leftIcon={<Edit className="h-4 w-4" />}
                 >
                   Change Photo
@@ -82,8 +83,8 @@ const AccountSettings = () => {
         </Card>
         
         {/* Payment Methods */}
-        <Card className="border border-gray-700 mb-6">
-          <CardHeader className="border-b border-gray-800 bg-gray-900">
+        <Card className="border border-gray-700 mb-6 bg-gray-900">
+          <CardHeader className="border-b border-gray-700 bg-gray-800/70">
             <div className="flex items-center">
               <CreditCard className="h-5 w-5 text-red-500 mr-2" aria-hidden="true" />
               <CardTitle className="text-white">Payment Methods</CardTitle>
@@ -99,13 +100,13 @@ const AccountSettings = () => {
                   </div>
                   <div>
                     <p className="text-white font-medium">•••• •••• •••• 4242</p>
-                    <p className="text-xs text-gray-400">Expires 05/2026</p>
+                    <p className="text-xs text-gray-300">Expires 05/2026</p>
                   </div>
                 </div>
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="text-gray-400 hover:text-white"
+                  className="text-gray-300 hover:text-white hover:bg-gray-700"
                   leftIcon={<Edit className="h-4 w-4" />}
                   ariaLabel="Edit payment method"
                 >
@@ -118,7 +119,7 @@ const AccountSettings = () => {
             <div className="flex justify-center sm:justify-start">
               <Button 
                 variant="outline" 
-                className="w-full border-dashed border-gray-600 text-gray-300 hover:bg-gray-800"
+                className="w-full border-dashed border-gray-600 text-white hover:bg-gray-800"
                 leftIcon={<Plus className="h-4 w-4" />}
               >
                 Add Payment Method
@@ -128,8 +129,8 @@ const AccountSettings = () => {
         </Card>
         
         {/* Account Preferences */}
-        <Card className="border border-gray-700">
-          <CardHeader className="border-b border-gray-800 bg-gray-900">
+        <Card className="border border-gray-700 bg-gray-900">
+          <CardHeader className="border-b border-gray-700 bg-gray-800/70">
             <div className="flex items-center">
               <Settings className="h-5 w-5 text-red-500 mr-2" aria-hidden="true" />
               <CardTitle className="text-white">Account Preferences</CardTitle>
