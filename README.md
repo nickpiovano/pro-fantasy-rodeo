@@ -51,17 +51,19 @@ npm run build
 ```
 
 ## 📁 Project Structure
-src/
-├── components/ # Reusable UI components
-├── context/ # State management
-├── hooks/ # Custom React hooks
-├── layouts/ # Page layout components
-├── pages/ # Main application pages
-├── services/ # API and external services
-├── styles/ # Global styles and theming
-├── types/ # TypeScript type definitions
-└── utils/ # Helper functions and utilities
 
+```
+src/  
+├── components/     # Reusable UI components  
+├── context/        # State management  
+├── hooks/          # Custom React hooks  
+├── layouts/        # Page layout components  
+├── pages/          # Main application pages  
+├── services/       # API and external services  
+├── styles/         # Global styles and theming  
+├── types/          # TypeScript type definitions  
+└── utils/          # Helper functions and utilities  
+```
 
 ## 📋 Documentation
 
