@@ -2,8 +2,6 @@
 
 A premium fantasy sports platform for rodeo enthusiasts featuring PRCA's 'Christmas in July' contest with $60,000 in cash prizes and a 2024 Ram 1500 truck grand prize.
 
-![Pro Fantasy Rodeo](https://github.com/nickpiovano/pro-fantasy-rodeo/raw/main/public/screenshot.png)
-
 ## 🏆 Overview
 
 Pro Fantasy Rodeo brings the thrill of fantasy sports to professional rodeo. Our flagship 'Christmas in July' contest lets fans build their dream team of rodeo athletes for $19.95 entry, competing for substantial prizes while experiencing the excitement of PRCA events in a new interactive way.
