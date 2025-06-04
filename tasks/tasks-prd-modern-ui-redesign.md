@@ -78,17 +78,17 @@
 
 - [ ] 4.0 Screen-Specific UI Enhancements
   - [ ] 4.1 Redesign Home page with parallax hero section
-  - [ ] 4.2 Create promotional cards with clear hierarchy and CTAs
+  - [x] 4.2 Create promotional cards with clear hierarchy and CTAs
   - [ ] 4.3 Implement enhanced CountdownTimer with engaging visualization
   - [ ] 4.4 Redesign HowItWorks component with modern, step-based layout
   - [ ] 4.5 Update RosterBuilder with card-swipe selection mechanics
   - [ ] 4.6 Enhance ProgressBar with interactive visualization
   - [ ] 4.7 Redesign contestant selection confirmation with subtle animations
-  - [ ] 4.8 Update Leaderboard with tiered styling and data visualization
-  - [ ] 4.9 Implement user position highlighting with entrance animation
-  - [ ] 4.10 Redesign PrizeSummary with visually striking team presentation
+  - [x] 4.8 Update Leaderboard with tiered styling and data visualization
+  - [x] 4.9 Implement user position highlighting with entrance animation
+  - [x] 4.10 Redesign PrizeSummary with visually striking team presentation
   - [ ] 4.11 Create animated confirmation sequence for EntryConfirmation page
-  - [ ] 4.12 Implement sharable team card designs
+  - [x] 4.12 Implement sharable team card designs
   - [ ] 4.13 Update all page transitions with smooth animations
 
 - [ ] 5.0 Animation and Motion System

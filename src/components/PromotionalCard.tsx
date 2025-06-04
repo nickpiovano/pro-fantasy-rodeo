@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-new';
 import { ButtonVariant } from '@/components/ui/button-new';
 import { ArrowRight } from 'lucide-react';
 
@@ -83,8 +83,8 @@ const PromotionalCard: React.FC<PromotionalCardProps> = ({
   // Card container classes
   const containerClasses = `
     overflow-hidden rounded-lg shadow-lg
-    ${western ? 'border-2 border-accent-500' : 'border border-gray-200'}
-    ${useGlass ? 'backdrop-blur-md bg-white/80' : 'bg-white'}
+    ${western ? 'border-2 border-red-500' : 'border border-gray-200'}
+    ${useGlass ? 'bg-white/95' : 'bg-white'}
     ${className}
   `.trim();
 
@@ -135,7 +135,7 @@ const PromotionalCard: React.FC<PromotionalCardProps> = ({
           {badgeText && (
             <div className={`
               absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-semibold
-              ${western ? 'bg-accent-500 text-secondary-900' : 'bg-primary-500 text-white'}
+              ${western ? 'bg-red-600 text-white' : 'bg-blue-600 text-white'}
             `}>
               {badgeText}
             </div>
@@ -150,7 +150,7 @@ const PromotionalCard: React.FC<PromotionalCardProps> = ({
           {icon && (
             <div className={`
               mr-3 p-2 rounded-full
-              ${western ? 'text-accent-500' : 'text-primary-500'}
+              ${western ? 'text-red-600' : 'text-blue-600'}
             `}>
               {icon}
             </div>
@@ -158,32 +158,33 @@ const PromotionalCard: React.FC<PromotionalCardProps> = ({
           
           <h3 className={`
             text-xl font-bold
-            ${western ? 'text-secondary-900' : 'text-gray-900'}
+            ${western ? 'text-gray-900' : 'text-gray-900'}
           `}>
             {title}
           </h3>
         </div>
         
         {/* Description */}
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-700 mb-6">
           {description}
         </p>
         
         {/* Call to action buttons */}
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className={`flex flex-wrap gap-3 ${secondaryCtaText ? 'justify-start' : 'justify-between'}`}>
           <Button
             variant={primaryVariant}
             onClick={onCtaClick}
-            className="group"
+            className={`${western ? 'bg-red-600 hover:bg-red-700 text-white' : ''}`}
+            rightIcon={<ArrowRight className="h-4 w-4" />}
           >
             {ctaText}
-            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
           
           {secondaryCtaText && onSecondaryCtaClick && (
             <Button
               variant={secondaryVariant}
               onClick={onSecondaryCtaClick}
+              className={western ? 'border-red-600 text-red-700 hover:bg-red-50' : ''}
             >
               {secondaryCtaText}
             </Button>

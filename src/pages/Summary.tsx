@@ -4,24 +4,20 @@ import { Button } from "@/components/ui/button";
 import { useNavigation } from "@/hooks/useNavigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, ArrowRight, Edit3, CreditCard } from "lucide-react";
-import type { TeamSelection } from "@/pages/Index";
+import { Check, ArrowRight, Edit3, CreditCard, AlertTriangle } from "lucide-react";
+import { useTeam } from "@/context/TeamContext";
+import { formatSalary } from "@/services/contest";
 
 const Summary = () => {
   const { navigateTo } = useNavigation();
+  const { teamSelections } = useTeam();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // In a real app, we would get this from context or params
-  // For now, let's mock some selected contestants
-  const mockSelections: TeamSelection[] = [
-    { eventId: "1", eventName: "Bareback Riding", contestantId: "101", contestantName: "Kaycee Feild" },
-    { eventId: "2", eventName: "Steer Wrestling", contestantId: "201", contestantName: "Tyler Waguespack" },
-    { eventId: "3", eventName: "Team Roping", contestantId: "301", contestantName: "Kaleb Driggers" },
-    { eventId: "4", eventName: "Saddle Bronc Riding", contestantId: "401", contestantName: "Ryder Wright" },
-    { eventId: "5", eventName: "Tie-Down Roping", contestantId: "501", contestantName: "Shad Mayfield" },
-    { eventId: "6", eventName: "Barrel Racing", contestantId: "601", contestantName: "Hailey Kinsel" },
-    { eventId: "7", eventName: "Bull Riding", contestantId: "701", contestantName: "Sage Kimzey" }
-  ];
+  // Calculate total salary
+  const totalSalary = teamSelections.reduce((sum, selection) => sum + selection.salary, 0);
+  const salaryCap = 800000; // $800,000 salary cap
+  const remainingSalary = salaryCap - totalSalary;
+  const isOverCap = totalSalary > salaryCap;
 
   const handleSubmitEntry = () => {
     setIsSubmitting(true);
@@ -41,54 +37,95 @@ const Summary = () => {
     <PageContainer title="Team Summary">
       <div className="p-4">
         {/* Team Selections */}
-        <Card className="glass-card mb-6 border-amber-500/30">
-          <CardHeader className="bg-gradient-to-r from-amber-500/10 to-red-500/10 border-b border-amber-500/30">
-            <CardTitle className="text-xl text-center text-white">Your Christmas in July Team</CardTitle>
+        <Card className="mb-6 border-2 border-amber-400 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-amber-100 to-amber-200 border-b-2 border-amber-300">
+            <CardTitle className="text-xl text-center text-stone-800">Your Christmas in July Team</CardTitle>
           </CardHeader>
-          <CardContent className="p-4">
-            <div className="space-y-3">
-              {mockSelections.map((selection) => (
-                <div 
-                  key={selection.eventId} 
-                  className="bg-white/5 rounded-lg p-3 flex justify-between items-center border border-white/10"
-                >
-                  <div>
-                    <div className="text-sm text-stone-400">{selection.eventName}</div>
-                    <div className="text-white font-medium">{selection.contestantName}</div>
-                  </div>
-                  <Badge className="bg-red-600">Selected</Badge>
+          <CardContent className="p-4 bg-white">
+            {/* Salary Summary */}
+            <div className="mb-4 p-3 rounded-lg bg-gray-100 border border-gray-200">
+              <div className="flex justify-between items-center">
+                <div>
+                  <span className="text-gray-700 font-medium">Total Salary:</span>
+                  <span className={`ml-2 font-bold ${isOverCap ? 'text-red-600' : 'text-green-600'}`}>
+                    {formatSalary(totalSalary)}
+                  </span>
                 </div>
-              ))}
+                <div>
+                  <span className="text-gray-700 font-medium">Remaining:</span>
+                  <span className={`ml-2 font-bold ${isOverCap ? 'text-red-600' : 'text-green-600'}`}>
+                    {isOverCap ? `-${formatSalary(Math.abs(remainingSalary))}` : formatSalary(remainingSalary)}
+                  </span>
+                </div>
+              </div>
+              
+              {isOverCap && (
+                <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded-md flex items-center text-sm text-red-700">
+                  <AlertTriangle className="h-4 w-4 mr-2 text-red-500" />
+                  <span>You've exceeded the salary cap. Please adjust your selections.</span>
+                </div>
+              )}
+            </div>
+            
+            {/* Selections List */}
+            <div className="space-y-3">
+              {teamSelections.length > 0 ? (
+                teamSelections.map((selection) => (
+                  <div 
+                    key={selection.eventId} 
+                    className="bg-gray-50 rounded-lg p-3 flex justify-between items-center border border-gray-200 hover:bg-gray-100 transition-colors"
+                  >
+                    <div>
+                      <div className="text-sm text-gray-500 font-medium">{selection.eventName}</div>
+                      <div className="text-gray-900 font-semibold">{selection.contestantName}</div>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-red-600 font-medium">{formatSalary(selection.salary)}</span>
+                      <Badge className="bg-green-600 hover:bg-green-700">Selected</Badge>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center p-6 bg-gray-50 rounded-lg border border-gray-200">
+                  <p className="text-gray-500">No contestants selected yet.</p>
+                  <Button 
+                    className="mt-3 bg-amber-500 hover:bg-amber-600 text-white"
+                    onClick={handleEditTeam}
+                  >
+                    Build Your Team
+                  </Button>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
 
         {/* Prize Information */}
-        <Card className="glass-card mb-6 border-red-500/30">
-          <CardHeader className="bg-gradient-to-r from-red-500/10 to-red-700/10 border-b border-red-500/30">
-            <CardTitle className="text-xl text-center text-white">Prize Details</CardTitle>
+        <Card className="mb-6 border-2 border-red-400 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-red-100 to-red-200 border-b-2 border-red-300">
+            <CardTitle className="text-xl text-center text-gray-800">Prize Details</CardTitle>
           </CardHeader>
-          <CardContent className="p-4">
+          <CardContent className="p-4 bg-white">
             <div className="space-y-3">
-              <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 rounded-lg p-4 border border-amber-500/30">
-                <h3 className="text-lg font-bold text-center text-white mb-2">Grand Prize</h3>
-                <p className="text-center text-amber-300 font-bold text-xl">2024 RAM 1500</p>
+              <div className="bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg p-4 border border-amber-200">
+                <h3 className="text-lg font-bold text-center text-gray-800 mb-2">Grand Prize</h3>
+                <p className="text-center text-red-600 font-bold text-xl">2024 RAM 1500</p>
               </div>
               
-              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-                <h3 className="text-lg font-bold text-center text-white mb-2">Cash Prizes</h3>
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <h3 className="text-lg font-bold text-center text-gray-800 mb-2">Cash Prizes</h3>
                 <ul className="space-y-2">
                   <li className="flex justify-between">
-                    <span className="text-stone-300">2nd Place</span>
-                    <span className="text-white font-medium">$20,000</span>
+                    <span className="text-gray-600">2nd Place</span>
+                    <span className="text-gray-900 font-medium">$20,000</span>
                   </li>
                   <li className="flex justify-between">
-                    <span className="text-stone-300">3rd Place</span>
-                    <span className="text-white font-medium">$15,000</span>
+                    <span className="text-gray-600">3rd Place</span>
+                    <span className="text-gray-900 font-medium">$15,000</span>
                   </li>
                   <li className="flex justify-between">
-                    <span className="text-stone-300">4th-10th Place</span>
-                    <span className="text-white font-medium">$1,000-$10,000</span>
+                    <span className="text-gray-600">4th-10th Place</span>
+                    <span className="text-gray-900 font-medium">$1,000-$10,000</span>
                   </li>
                 </ul>
               </div>
@@ -97,20 +134,20 @@ const Summary = () => {
         </Card>
 
         {/* Entry Fee and Submit */}
-        <Card className="glass-card mb-6 border-green-500/30">
-          <CardContent className="p-4">
+        <Card className="mb-6 border-2 border-green-400 shadow-lg">
+          <CardContent className="p-4 bg-white">
             <div className="flex justify-between items-center mb-4">
               <div>
-                <h3 className="text-lg font-bold text-white">Entry Fee</h3>
-                <p className="text-stone-400 text-sm">One entry per person</p>
+                <h3 className="text-lg font-bold text-gray-800">Entry Fee</h3>
+                <p className="text-gray-600 text-sm">One entry per person</p>
               </div>
-              <div className="text-2xl font-bold text-green-400">$19.95</div>
+              <div className="text-2xl font-bold text-green-600">$19.95</div>
             </div>
             
             <div className="flex space-x-3">
               <Button 
                 variant="outline" 
-                className="flex-1 border-white/20 text-white hover:bg-white/10"
+                className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-100"
                 onClick={handleEditTeam}
               >
                 <Edit3 className="mr-2 h-4 w-4" />
@@ -118,9 +155,9 @@ const Summary = () => {
               </Button>
               
               <Button 
-                className="flex-1 btn-primary"
+                className="flex-1 bg-green-600 hover:bg-green-700 text-white"
                 onClick={handleSubmitEntry}
-                disabled={isSubmitting}
+                disabled={isSubmitting || isOverCap}
               >
                 {isSubmitting ? (
                   <>Processing...</>

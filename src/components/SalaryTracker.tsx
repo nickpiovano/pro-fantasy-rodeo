@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, DollarSign } from 'lucide-react';
 import ProgressBar from './ProgressBar';
 import contestService from '@/services/contest';
 import { formatSalary } from '@/services/contest';
@@ -79,23 +79,20 @@ const SalaryTracker: React.FC<SalaryTrackerProps> = ({
   
   return (
     <div className={`${className}`}>
-      <div className="flex justify-between items-center mb-1">
-        <div className="text-sm font-medium">
-          Salary Cap: 
-          <span className={`ml-1 font-bold ${isOverCap ? 'text-red-500' : 'text-white'}`}>
+      <div className="flex justify-between items-center mb-2">
+        <div className="flex items-center">
+          <div className="bg-red-600 p-1.5 rounded-md mr-2">
+            <DollarSign className="h-4 w-4 text-white" />
+          </div>
+          <span className="text-sm font-semibold text-white">Salary Cap</span>
+        </div>
+        
+        <div className="text-sm font-mono">
+          <span className={`font-bold ${isOverCap ? 'text-red-400' : 'text-white'}`}>
             {formattedCurrentSalary}
           </span>
           <span className="mx-1 text-gray-400">/</span>
           <span className="text-gray-300">{formattedSalaryCap}</span>
-        </div>
-        
-        <div className="text-sm">
-          <span className={`font-bold ${isOverCap ? 'text-red-500' : 'text-gray-300'}`}>
-            {isOverCap 
-              ? `${formatSalary(currentSalary - salaryCap)} over` 
-              : `${formatSalary(salaryCap - currentSalary)} remaining`
-            }
-          </span>
         </div>
       </div>
       
@@ -108,19 +105,27 @@ const SalaryTracker: React.FC<SalaryTrackerProps> = ({
         milestones={[salaryCap * 0.25, salaryCap * 0.5, salaryCap * 0.75, salaryCap]}
       />
       
-      {/* Average salary remaining per pick */}
-      {!isOverCap && remainingPicks > 0 && (
-        <div className="flex justify-end mt-1">
-          <span className="text-xs text-amber-300">
-            Avg. per pick: {formattedAverageSalary}
-          </span>
+      <div className="flex justify-between items-center mt-2 text-xs">
+        {/* Remaining salary */}
+        <div className={`${isOverCap ? 'text-red-400' : 'text-gray-300'}`}>
+          {isOverCap 
+            ? <span className="font-medium">{formatSalary(currentSalary - salaryCap)} over</span> 
+            : <span>{formatSalary(salaryCap - currentSalary)} remaining</span>
+          }
         </div>
-      )}
+        
+        {/* Average salary remaining per pick */}
+        {!isOverCap && remainingPicks > 0 && (
+          <div className="text-gray-300">
+            Avg. per pick: <span className="font-medium text-red-300">{formattedAverageSalary}</span>
+          </div>
+        )}
+      </div>
       
       {/* Warning message when over cap - always show when over cap */}
       {isOverCap && (
         <motion.div 
-          className="mt-2 p-2 bg-red-900/50 border border-red-500 rounded-md flex items-center text-sm text-red-200"
+          className="mt-3 p-2 bg-red-900/50 border border-red-500 rounded-md flex items-center text-sm text-red-200"
           variants={warningAnimation}
           initial="hidden"
           animate="visible"

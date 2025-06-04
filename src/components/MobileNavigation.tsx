@@ -6,6 +6,7 @@ interface NavItem {
   path: string;
   label: string;
   icon: JSX.Element;
+  subPaths?: string[];
 }
 
 const MobileNavigation = () => {
@@ -21,7 +22,7 @@ const MobileNavigation = () => {
     },
     {
       path: '/roster',
-      label: 'Build Team',
+      label: 'Teams',
       icon: <List size={24} />
     },
     {
@@ -37,13 +38,19 @@ const MobileNavigation = () => {
     {
       path: '/account',
       label: 'Account',
-      icon: <User size={24} />
+      icon: <User size={24} />,
+      subPaths: ['/privacy-security', '/account-settings']
     }
   ];
 
-  const isActive = (path: string) => {
+  const isActive = (path: string, subPaths?: string[]) => {
     if (path === '/' && currentPath === '/') return true;
-    if (path !== '/' && currentPath.startsWith(path)) return true;
+    if (path !== '/' && currentPath === path) return true;
+    
+    if (subPaths && subPaths.some(subPath => currentPath === subPath)) {
+      return true;
+    }
+    
     return false;
   };
 
@@ -55,12 +62,12 @@ const MobileNavigation = () => {
             key={item.path}
             onClick={() => navigateTo(item.path, item.label)}
             className={`flex flex-col items-center justify-center h-full w-full min-w-[48px] py-1 px-2 
-              ${isActive(item.path) 
+              ${isActive(item.path, item.subPaths) 
                 ? 'text-red-500 border-t-2 border-red-500 -mt-[2px] bg-stone-800/50' 
                 : 'text-stone-400 hover:text-white'
               } transition-colors`}
             aria-label={item.label}
-            aria-current={isActive(item.path) ? 'page' : undefined}
+            aria-current={isActive(item.path, item.subPaths) ? 'page' : undefined}
           >
             {item.icon}
             <span className="text-[10px] mt-1 font-medium">{item.label}</span>

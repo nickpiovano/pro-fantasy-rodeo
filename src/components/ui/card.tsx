@@ -1,19 +1,25 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-white p-4 shadow-sm",
-      className
-    )}
-    {...props}
-  />
-))
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Adds role="region" and aria-label for accessibility */
+  ariaLabel?: string;
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, ariaLabel, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "rounded-lg border bg-white p-4 shadow-sm",
+        className
+      )}
+      role={ariaLabel ? "region" : undefined}
+      aria-label={ariaLabel}
+      {...props}
+    />
+  )
+)
 Card.displayName = "Card"
 
 const CardHeader = React.forwardRef<
@@ -78,6 +84,8 @@ CardFooter.displayName = "CardFooter"
 interface CardImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   className?: string;
   position?: 'top' | 'bottom';
+  /** Alt text is required for accessibility */
+  alt: string;
 }
 
 const CardImage = React.forwardRef<
@@ -93,7 +101,7 @@ const CardImage = React.forwardRef<
     >
       <img
         src={src}
-        alt={alt || ""}
+        alt={alt}
         className="w-full h-auto object-cover"
         {...props}
       />

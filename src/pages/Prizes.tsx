@@ -64,7 +64,7 @@ const Prizes = () => {
           </div>
           
           <div className="mt-6 text-center text-stone-400 text-sm">
-            Winners will be announced the first week of August.
+            Winners will be announced the first week of July.
           </div>
         </div>
       </div>

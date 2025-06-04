@@ -18,21 +18,21 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
       title: "Pick Your Team", 
       description: "Select one contestant from each PRCA event category to build your dream team.",
       icon: <Users className="w-6 h-6" />,
-      color: western ? 'accent-500' : 'blue-500'
+      color: western ? 'red-600' : 'blue-500'
     },
     { 
       step: 2, 
       title: "Submit Entry", 
       description: "Pay the $19.95 entry fee and lock in your picks before the deadline.",
       icon: <Send className="w-6 h-6" />,
-      color: western ? 'accent-600' : 'indigo-500'
+      color: western ? 'red-600' : 'indigo-500'
     },
     { 
       step: 3, 
       title: "Win Big", 
       description: "Top teams split $60,000 in cash prizes plus a brand new Ram 1500 truck!",
       icon: <Trophy className="w-6 h-6" />,
-      color: western ? 'accent-700' : 'purple-500'
+      color: western ? 'red-600' : 'purple-500'
     }
   ];
 
@@ -60,16 +60,16 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
 
   // Style classes based on theme
   const cardClasses = western 
-    ? 'border-2 border-accent-500 bg-secondary-900/90 backdrop-blur-sm' 
+    ? 'border-2 border-red-600 bg-gray-900 shadow-lg' 
     : 'border border-gray-200 bg-white';
   
   const titleClasses = western 
-    ? 'text-accent-400 font-bold' 
+    ? 'text-red-500 font-bold' 
     : 'text-gray-900';
 
   return (
     <Card className={`overflow-hidden ${cardClasses} ${className || ''}`}>
-      <CardHeader className={western ? 'border-b border-accent-500/30' : 'border-b'}>
+      <CardHeader className={western ? 'border-b border-red-800 bg-gradient-to-r from-gray-900 to-gray-800' : 'border-b'}>
         <CardTitle className={`text-center text-2xl ${titleClasses}`}>
           How It Works
         </CardTitle>
@@ -91,7 +91,8 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
             >
               {/* Step number badge */}
               <div 
-                className={`absolute -top-3 -left-3 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold z-10 border-2 bg-${color} text-white border-white`}
+                className="absolute -top-3 -left-3 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold z-10 border-2 text-white border-gray-800"
+                style={{ backgroundColor: western ? '#dc2626' : '' }}
               >
                 {step}
               </div>
@@ -100,7 +101,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
               <div className={`
                 p-5 rounded-lg h-full flex flex-col
                 ${western 
-                  ? `bg-secondary-800/50 border border-${color}/30` 
+                  ? `bg-gray-800 border border-gray-700` 
                   : `bg-${color}/5 border border-${color}/20`
                 }
               `}>
@@ -108,7 +109,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
                 <div className={`
                   w-12 h-12 rounded-full mb-4 flex items-center justify-center
                   ${western 
-                    ? `bg-${color}/20 text-${color}` 
+                    ? `bg-red-900/50 text-red-400` 
                     : `bg-${color}/10 text-${color}`
                   }
                 `}>
@@ -118,13 +119,13 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
                 {/* Title */}
                 <h3 className={`
                   font-bold text-lg mb-2
-                  ${western ? `text-${color}` : `text-${color}`}
+                  ${western ? `text-red-400` : `text-${color}`}
                 `}>
                   {title}
                 </h3>
                 
                 {/* Description */}
-                <p className={western ? 'text-white/80' : 'text-gray-600'}>
+                <p className={western ? 'text-gray-300' : 'text-gray-600'}>
                   {description}
                 </p>
                 
@@ -132,7 +133,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
                 <motion.div 
                   className={`
                     mt-auto self-end w-6 h-6 rounded-full flex items-center justify-center
-                    ${western ? `bg-${color} text-white` : `bg-${color} text-white`}
+                    ${western ? `bg-red-600 text-white` : `bg-${color} text-white`}
                   `}
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -149,9 +150,9 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
               
               {/* Connector line (only for steps 1 and 2) */}
               {step < 3 && (
-                <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gray-300">
+                <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-gray-700">
                   <motion.div 
-                    className={`h-full bg-${color}`}
+                    className={western ? "h-full bg-red-500" : `h-full bg-${color}`}
                     initial={{ width: 0 }}
                     animate={{ width: '100%' }}
                     transition={{ delay: 0.7 + step * 0.2, duration: 0.5 }}
@@ -168,7 +169,8 @@ const HowItWorks: React.FC<HowItWorksProps> = ({
             {steps.map((_, index) => (
               <motion.div
                 key={index}
-                className={`w-2 h-2 rounded-full bg-${steps[index].color}`}
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: western ? '#f87171' : '' }}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.3 + index * 0.2 }}

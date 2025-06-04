@@ -9,28 +9,28 @@ const Confirmation = () => {
 
   return (
     <PageContainer title="Entry Confirmed" showBackButton={false}>
-      <div className="p-4">
-        <div className="flex justify-center my-6">
-          <div className="rounded-full bg-green-500/20 p-4 border-4 border-green-500/40">
-            <CheckCircle className="h-16 w-16 text-green-500" />
+      <div className="p-4 max-w-md mx-auto">
+        <div className="flex justify-center my-8">
+          <div className="rounded-full bg-green-100 p-4 border-4 border-green-500">
+            <CheckCircle className="h-16 w-16 text-green-600" />
           </div>
         </div>
 
-        <Card className="glass-card mb-6 border-green-500/30">
-          <CardHeader className="bg-gradient-to-r from-green-500/10 to-green-700/10 border-b border-green-500/30">
-            <CardTitle className="text-xl text-center text-white">You're in!</CardTitle>
+        <Card className="mb-6 border-2 border-green-500 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-green-100 border-b-2 border-green-200">
+            <CardTitle className="text-2xl text-center text-green-800">You're in!</CardTitle>
           </CardHeader>
-          <CardContent className="p-6 text-center">
-            <p className="text-white mb-4">
+          <CardContent className="p-6 text-center bg-white">
+            <p className="text-gray-800 mb-4 text-lg">
               Your entry for the Christmas in July contest has been successfully submitted!
             </p>
-            <p className="text-stone-400 mb-6">
+            <p className="text-gray-600 mb-6">
               Winners will be announced after the contest ends on July 31st.
             </p>
             
             <div className="flex flex-col space-y-3">
               <Button 
-                className="w-full bg-gradient-to-r from-red-700 to-red-600 hover:from-red-800 hover:to-red-700"
+                className="w-full bg-red-600 hover:bg-red-700 text-white"
                 onClick={() => navigateTo("/leaderboard", "Leaderboard")}
               >
                 <TrendingUp className="mr-2 h-5 w-5" />
@@ -39,7 +39,7 @@ const Confirmation = () => {
               
               <Button 
                 variant="outline"
-                className="w-full border-amber-500/30 text-amber-400 hover:bg-amber-500/10 hover:text-amber-300"
+                className="w-full border-amber-500 text-amber-700 hover:bg-amber-50 hover:text-amber-800"
                 onClick={() => navigateTo("/prizes", "Prizes")}
               >
                 <Award className="mr-2 h-5 w-5" />
@@ -48,7 +48,7 @@ const Confirmation = () => {
               
               <Button 
                 variant="ghost"
-                className="w-full text-stone-400 hover:text-white hover:bg-white/5"
+                className="w-full text-gray-600 hover:text-gray-800 hover:bg-gray-100"
                 onClick={() => navigateTo("/", "Home")}
               >
                 <Home className="mr-2 h-5 w-5" />
@@ -58,9 +58,9 @@ const Confirmation = () => {
           </CardContent>
         </Card>
 
-        <div className="text-center text-stone-500 text-sm mt-8">
+        <div className="text-center text-gray-600 text-sm mt-8">
           <p>Need help or have questions?</p>
-          <p className="mt-1">Contact support at support@profantasyrodeo.com</p>
+          <p className="mt-1">Contact support at <a href="mailto:support@profantasyrodeo.com" className="text-blue-600 hover:underline">support@profantasyrodeo.com</a></p>
         </div>
       </div>
     </PageContainer>

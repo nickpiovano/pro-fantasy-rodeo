@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-new';
 import useParallax from '@/hooks/useParallax';
 import CountdownTimer from './CountdownTimer';
 
@@ -76,8 +76,8 @@ const ParallaxHero: React.FC<ParallaxHeroProps> = ({
         className="absolute inset-0 z-20"
       />
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70 z-30" />
+      {/* Gradient overlay - Darker to ensure text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 z-30" />
 
       {/* Content */}
       <div 
@@ -89,7 +89,7 @@ const ParallaxHero: React.FC<ParallaxHeroProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-accent-500/90 text-secondary-900 font-bold px-4 py-1 rounded-full text-sm md:text-base mb-3"
+          className="bg-red-600 text-white font-bold px-4 py-1 rounded-full text-sm md:text-base mb-3"
         >
           {subtitle}
         </motion.div>
@@ -107,7 +107,7 @@ const ParallaxHero: React.FC<ParallaxHeroProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-accent-100 text-lg md:text-xl font-semibold mb-6"
+          className="text-yellow-300 text-lg md:text-xl font-semibold mb-6 drop-shadow-md"
         >
           {prizeText}
         </motion.p>
@@ -118,22 +118,21 @@ const ParallaxHero: React.FC<ParallaxHeroProps> = ({
           transition={{ duration: 0.5, delay: 0.7 }}
           className="w-full max-w-md"
         >
-          <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg mb-4">
-            <CountdownTimer endDate={endDate} className="text-secondary-800" />
+          <div className="bg-white p-4 rounded-lg mb-4 shadow-lg">
+            <CountdownTimer endDate={endDate} className="text-gray-800" />
           </div>
 
           <Button 
+            variant="primary" 
+            className="mt-6 px-10 py-4 text-xl font-bold bg-red-600 hover:bg-red-700"
             onClick={onStartEntry}
-            variant="western"
-            size="lg"
-            className="w-full text-xl py-7 group"
+            rightIcon={<ArrowRight className="h-6 w-6" />}
           >
             BUILD YOUR TEAM
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
           
-          <p className="text-center text-white text-sm mt-3">
-            Entry Fee: <span className="font-bold text-accent-300">$19.95</span>
+          <p className="text-center text-white text-sm mt-3 bg-black/50 py-2 rounded-md">
+            Entry Fee: <span className="font-bold text-yellow-300">$19.95</span>
           </p>
         </motion.div>
       </div>

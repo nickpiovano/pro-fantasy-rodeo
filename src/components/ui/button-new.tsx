@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { cva } from 'class-variance-authority';
+import { styleGuide } from '@/styles/style-guide';
 
 // Define buttonVariants for use with other components
 export const buttonVariants = cva(
@@ -83,6 +84,11 @@ export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children">
    * Whether to use glass effect (only applies to secondary and tertiary variants)
    */
   useGlass?: boolean;
+  
+  /**
+   * Accessible label for the button when the visual text is not descriptive enough
+   */
+  ariaLabel?: string;
 }
 
 export const Button = ({
@@ -96,10 +102,13 @@ export const Button = ({
   className = '',
   useGradient = false,
   useGlass = false,
+  ariaLabel,
   ...props
 }: ButtonProps) => {
-  // Base style classes
-  const baseClasses = 'relative inline-flex items-center justify-center rounded-md font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const { westernTheme } = styleGuide;
+  
+  // Base style classes with space-between to push icon to the right
+  const baseClasses = 'relative inline-flex items-center rounded-md font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
   
   // Size classes
   const sizeClasses = {
@@ -136,13 +145,20 @@ export const Button = ({
     success: 'bg-green-500 text-white hover:bg-green-600 hover:shadow-md active:bg-green-700 active:shadow-inner active:scale-[0.98] focus:ring-green-500 focus:ring-offset-2',
   };
   
-  // Width classes
-  const widthClasses = fullWidth ? 'w-full' : '';
+  // Width classes - limit max width to 50% on smaller screens when not fullWidth
+  const widthClasses = fullWidth 
+    ? 'w-full' 
+    : 'max-w-[240px] sm:max-w-[280px] md:max-w-xs'; // Responsive max width
   
   // Disabled classes
   const disabledClasses = props.disabled 
     ? 'opacity-50 cursor-not-allowed pointer-events-none' 
     : '';
+  
+  // Layout classes - different layouts based on whether we have a right icon
+  const layoutClasses = rightIcon 
+    ? 'justify-between' // Push content to edges when we have a right icon
+    : 'justify-center'; // Center content when no right icon
   
   // Combine all classes
   const buttonClasses = `
@@ -151,16 +167,19 @@ export const Button = ({
     ${variantClasses[variant]}
     ${widthClasses}
     ${disabledClasses}
+    ${layoutClasses}
     ${className}
   `.trim();
   
   // Loading spinner element
   const LoadingSpinner = () => (
     <svg 
-      className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" 
+      className="animate-spin h-4 w-4 text-current mr-2" 
       xmlns="http://www.w3.org/2000/svg" 
       fill="none" 
       viewBox="0 0 24 24"
+      aria-hidden="true"
+      role="presentation"
     >
       <circle 
         className="opacity-25" 
@@ -184,12 +203,31 @@ export const Button = ({
       whileTap={!props.disabled ? { scale: 0.98 } : undefined}
       whileHover={!props.disabled ? { y: -2 } : undefined}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      aria-label={ariaLabel}
+      aria-busy={isLoading}
+      aria-disabled={props.disabled}
       {...props}
     >
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && leftIcon && <span className="mr-2">{leftIcon}</span>}
-      {children}
-      {!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}
+      <div className="flex items-center">
+        {isLoading && (
+          <>
+            <LoadingSpinner />
+            <span className="sr-only">Loading...</span>
+          </>
+        )}
+        {!isLoading && leftIcon && (
+          <span className="flex-shrink-0 mr-2" aria-hidden="true">
+            {leftIcon}
+          </span>
+        )}
+        <span>{children}</span>
+      </div>
+      
+      {!isLoading && rightIcon && (
+        <span className="flex-shrink-0 ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true">
+          {rightIcon}
+        </span>
+      )}
     </motion.button>
   );
 }; 

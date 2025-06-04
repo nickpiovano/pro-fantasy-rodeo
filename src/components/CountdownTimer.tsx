@@ -25,9 +25,9 @@ const CountdownTimer = ({
   endDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // Default 30 days from now
   className, 
   onComplete,
-  label = "Contest Ends In:",
+  label = "Contest entry closes in:",
   western = true,
-  showProgressRings = true,
+  showProgressRings = false, //default to false
   animateOnChange = true,
   size = 'md'
 }: CountdownTimerProps) => {
@@ -134,19 +134,19 @@ const CountdownTimer = ({
   const getColorClasses = () => {
     if (western) {
       return {
-        background: 'bg-secondary-800',
-        text: 'text-accent-400',
-        labelText: 'text-accent-200',
-        ring: 'stroke-accent-500',
-        ringBackground: 'stroke-secondary-700'
+        background: 'bg-white',
+        text: 'text-red-700',
+        labelText: 'text-red-800',
+        ring: 'stroke-red-600',
+        ringBackground: 'stroke-gray-200'
       };
     }
     return {
-      background: 'bg-gray-800',
-      text: 'text-white',
-      labelText: 'text-gray-300',
-      ring: 'stroke-primary-500',
-      ringBackground: 'stroke-gray-700'
+      background: 'bg-white',
+      text: 'text-gray-800',
+      labelText: 'text-gray-700',
+      ring: 'stroke-blue-600',
+      ringBackground: 'stroke-gray-200'
     };
   };
 
@@ -187,7 +187,7 @@ const CountdownTimer = ({
   return (
     <div className={`text-center ${className || ''}`}>
       {label && (
-        <p className={`font-semibold mb-3 ${western ? 'text-accent-300' : 'text-gray-400'}`}>
+        <p className={`font-semibold mb-3 ${western ? 'text-red-700' : 'text-gray-700'}`}>
           {label}
         </p>
       )}
@@ -199,7 +199,7 @@ const CountdownTimer = ({
           return (
             <div 
               key={label} 
-              className={`relative ${colorClasses.background} rounded-lg ${western ? 'border-2 border-accent-600' : ''} ${sizeClasses.container}`}
+              className={`relative ${colorClasses.background} rounded-lg ${western ? 'border-2 border-red-500' : 'border border-gray-300'} shadow-sm ${sizeClasses.container}`}
             >
               {showProgressRings && (
                 <div className={`absolute inset-0 flex items-center justify-center ${sizeClasses.ring}`}>
@@ -256,7 +256,7 @@ const CountdownTimer = ({
                 </div>
                 
                 {/* Label */}
-                <div className={`uppercase tracking-wide ${colorClasses.labelText} ${sizeClasses.label}`}>
+                <div className={`${colorClasses.labelText} ${sizeClasses.label} font-medium mt-1`}>
                   {label}
                 </div>
               </div>

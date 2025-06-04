@@ -1,6 +1,6 @@
 import PageContainer from "@/components/PageContainer";
-import { User, LogOut, Shield, Star, Truck, Settings } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { User, LogOut, Shield, Settings } from "lucide-react";
+import { Button } from "@/components/ui/button-new";
 import { useNavigation } from "@/hooks/useNavigation";
 
 const Account = () => {
@@ -17,11 +17,11 @@ const Account = () => {
 
   return (
     <PageContainer title="Account">
-      <div className="p-4">
-        <div className="glass-card p-6 mb-6">
+      <div className="p-4 max-w-md mx-auto">
+        <div className="glass-card p-6 mb-6 bg-gray-900/80 border border-gray-800 rounded-lg">
           <div className="flex items-center justify-center mb-6">
             <div className="h-20 w-20 rounded-full bg-red-700 flex items-center justify-center">
-              <User className="h-10 w-10 text-white" />
+              <User className="h-10 w-10 text-white" aria-hidden="true" />
             </div>
           </div>
           
@@ -33,53 +33,37 @@ const Account = () => {
           </p>
           
           <div className="flex justify-center mb-4">
-            <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-center">
+            <div className="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-center">
               <p className="text-stone-400 text-xs">Joined</p>
               <p className="text-white">{userInfo.joinDate}</p>
             </div>
           </div>
           
-          <div className="space-y-3 mt-6">
+          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-3 mt-6 items-center">
             <Button 
               variant="outline" 
-              className="w-full flex justify-start items-center bg-white/5 border-white/10 hover:bg-white/10 text-white"
-              onClick={() => navigateTo("/my-teams", "My Teams")}
+              className="w-full bg-gray-800/50 border-gray-700 text-white hover:bg-gray-700"
+              onClick={() => navigateTo("/privacy-security", "Privacy & Security")}
+              leftIcon={<Shield className="h-5 w-5 text-green-400" />}
             >
-              <Star className="h-5 w-5 mr-3 text-amber-400" />
-              My Teams
-            </Button>
-            <Button 
-              variant="outline" 
-              className="w-full flex justify-start items-center bg-white/5 border-white/10 hover:bg-white/10 text-white"
-              onClick={() => navigateTo("/prizes", "Prizes")}
-            >
-              <Truck className="h-5 w-5 mr-3 text-red-400" />
-              Prize Information
-            </Button>
-            <Button 
-              variant="outline" 
-              className="w-full flex justify-start items-center bg-white/5 border-white/10 hover:bg-white/10 text-white"
-              onClick={() => navigateTo("/privacy", "Privacy")}
-            >
-              <Shield className="h-5 w-5 mr-3 text-green-400" />
               Privacy & Security
             </Button>
             <Button 
               variant="outline" 
-              className="w-full flex justify-start items-center bg-white/5 border-white/10 hover:bg-white/10 text-white"
-              onClick={() => navigateTo("/settings", "Settings")}
+              className="w-full bg-gray-800/50 border-gray-700 text-white hover:bg-gray-700"
+              onClick={() => navigateTo("/account-settings", "Account Settings")}
+              leftIcon={<Settings className="h-5 w-5 text-blue-400" />}
             >
-              <Settings className="h-5 w-5 mr-3 text-blue-400" />
               Account Settings
             </Button>
           </div>
           
-          <div className="mt-8">
+          <div className="mt-8 flex justify-center">
             <Button 
               variant="outline" 
-              className="w-full border-red-800/30 text-red-400 hover:bg-red-900/20 hover:text-red-300"
+              className="w-full sm:max-w-xs border-red-800/30 text-red-400 hover:bg-red-900/20 hover:text-red-300"
+              leftIcon={<LogOut className="h-5 w-5" />}
             >
-              <LogOut className="h-5 w-5 mr-2" />
               Sign Out
             </Button>
           </div>
@@ -87,7 +71,7 @@ const Account = () => {
         
         <div className="text-center text-stone-500 text-xs mt-6">
           <p>Pro Fantasy Rodeo • Version 1.0.0</p>
-          <p className="mt-1">© 2024 All Rights Reserved</p>
+          <p className="mt-1">© 2025 All Rights Reserved</p>
         </div>
       </div>
     </PageContainer>

@@ -12,7 +12,7 @@ import HowItWorks from "@/components/HowItWorks";
 import CountdownTimer from "@/components/CountdownTimer";
 import ParallaxHero from "@/components/ParallaxHero";
 import PromotionalCard from "@/components/PromotionalCard";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button-new";
 import { ArrowRight, Calendar, DollarSign, Trophy, Info } from "lucide-react";
 import { useNavigation } from "@/hooks/useNavigation";
 import { motion } from "framer-motion";
@@ -170,7 +170,7 @@ const Index = () => {
         subtitle="CHRISTMAS IN JULY"
         prizeText="+ $60,000 in Cash Prizes"
         endDate={contestEndDate}
-        onStartEntry={() => navigateTo('/roster', 'Build Your Team')}
+        onStartEntry={() => navigateTo('/roster-builder', 'Build Your Team')}
       />
 
       {/* Main Content */}
@@ -181,14 +181,9 @@ const Index = () => {
         animate="visible"
         viewport={{ once: true }}
       >
-        {/* How It Works Section */}
-        <motion.div className="mb-10" variants={itemVariants}>
-          <HowItWorks western={true} />
-        </motion.div>
-
-        {/* Promotional Cards Section */}
-        <motion.div variants={itemVariants}>
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">
+        {/* Promotional Cards Section - "Why Join" - Now First */}
+        <motion.div variants={itemVariants} className="mb-10">
+          <h2 className="text-3xl font-bold text-red-600 mb-6 text-center drop-shadow-sm">
             Why Join Pro Fantasy Rodeo?
           </h2>
           
@@ -207,7 +202,7 @@ const Index = () => {
               title="Simple Entry"
               description="Just $19.95 to enter. Pick one contestant from each event category to build your team."
               ctaText="Enter Now"
-              onCtaClick={() => navigateTo('/roster', 'Build Your Team')}
+              onCtaClick={() => navigateTo('/roster-builder', 'Build Your Team')}
               icon={<DollarSign className="h-6 w-6" />}
               badgeText="$19.95"
               western={true}
@@ -216,10 +211,8 @@ const Index = () => {
             <PromotionalCard
               title="Limited Time"
               description="Contest runs June 15 - July 1. All entries must be complete by June 14th."
-              ctaText="View Schedule"
-              onCtaClick={() => {}}
-              secondaryCtaText="Rules"
-              onSecondaryCtaClick={() => {}}
+              ctaText="Get Started"
+              onCtaClick={() => navigateTo('/roster-builder', 'Build Your Team')}
               icon={<Calendar className="h-6 w-6" />}
               badgeText="JUNE 15 - JULY 1"
               western={true}
@@ -227,47 +220,36 @@ const Index = () => {
           </div>
         </motion.div>
 
-        {/* Countdown and CTA Section */}
-        <motion.div 
-          className="bg-secondary-900/80 backdrop-blur-sm border-2 border-accent-500 rounded-lg p-6 text-center mb-10"
-          variants={itemVariants}
-        >
-          <h2 className="text-2xl font-bold text-accent-400 mb-4">
-            Time is Running Out!
-          </h2>
-          
-          <div className="max-w-md mx-auto mb-6">
-            <CountdownTimer 
-              endDate={contestEndDate}
-              label="Contest Closes In:"
-              western={true}
-              showProgressRings={true}
-              size="lg"
-            />
-          </div>
-          
-          <Button 
-            onClick={() => navigateTo('/roster', 'Build Your Team')} 
-            variant="western"
-            size="lg"
-            useGradient={true}
-            className="w-full md:w-auto md:px-12 py-6 text-xl"
-          >
-            Build Your Team <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+        {/* How It Works Section - Now Second */}
+        <motion.div className="mb-10" variants={itemVariants}>
+          <HowItWorks western={true} className="border-2 border-red-500" />
         </motion.div>
 
-        {/* FAQ Section */}
+        {/* Additional Information */}
         <motion.div 
-          className="text-center mb-6"
+          className="text-center text-gray-400 text-sm"
           variants={itemVariants}
         >
-          <Button 
-            variant="ghost" 
-            className="text-white hover:text-accent-300 flex items-center gap-2"
-          >
-            <Info className="h-4 w-4" /> Contest Rules & FAQ
-          </Button>
+          
+          
+          <div className="flex justify-center">
+            <Button 
+              variant="primary" 
+              rightIcon={<ArrowRight className="h-6 w-6" />}
+              className="max-w-md text-xl py-4 px-10 font-bold bg-red-600 hover:bg-red-700"
+              onClick={() => navigateTo('/roster-builder', 'Build Your Team')}
+            >
+              BUILD YOUR TEAM
+            </Button>
+          </div><br></br><br></br>
+
+          <p className="mb-2">
+            <Info className="inline-block mr-1 h-4 w-4" />
+            Contest runs June 15 - July 1, 2025. All entries must be complete by June 14th.
+          </p>
+          <p className="mb-8">
+            Official rules and prize details available at <a href="#" className="text-red-400 hover:text-red-300 underline">profantasyrodeo.com/rules</a>
+          </p>
         </motion.div>
       </motion.div>
     </PageContainer>
